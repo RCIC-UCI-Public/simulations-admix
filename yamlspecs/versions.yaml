@@ -1,0 +1,4 @@
+compiler:
+  name: gcc
+  version: "8.3.0"
+opensees: "3.1.0"

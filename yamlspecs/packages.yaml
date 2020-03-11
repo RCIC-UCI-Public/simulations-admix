@@ -1,0 +1,7 @@
+system:
+bootstrap:
+build:
+   - opensees
+   - opensees-module
+manifest:
+   - "{{build}}"

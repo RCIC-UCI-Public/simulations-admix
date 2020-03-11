@@ -1,0 +1,154 @@
+--- OpenSees-3.1.0/Makefile.orig	2019-11-16 11:48:05.000000000 -0800
++++ OpenSees-3.1.0/Makefile	2020-03-02 11:52:20.172000000 -0800
+@@ -42,8 +42,8 @@
+ 
+ all: 
+ ifdef MKDIR
+-	$(MKDIR) $(HOME)/bin
+-	$(MKDIR) $(HOME)/lib
++	$(MKDIR) $(OSBDIR)/bin
++	$(MKDIR) $(OSBDIR)/lib
+ endif
+ 	@( \
+ 	for f in $(DIRS); \
+@@ -60,8 +60,8 @@
+ 
+ tcl:
+ ifdef MKDIR
+-	$(MKDIR) $(HOME)/bin
+-	$(MKDIR) $(HOME)/lib
++	$(MKDIR) $(OSBDIR)/bin
++	$(MKDIR) $(OSBDIR)/lib
+ endif
+ 	@$(ECHO) Building OpenSees Program ..;
+ 	@$(CD) $(FE)/tcl;  $(MAKE) tcl;
+@@ -78,8 +78,8 @@
+ 
+ python: 
+ ifdef MKDIR
+-	$(MKDIR) $(HOME)/bin
+-	$(MKDIR) $(HOME)/lib
++	$(MKDIR) $(OSBDIR)/bin
++	$(MKDIR) $(OSBDIR)/lib
+ endif
+ 	@( \
+ 	for f in $(DIRS); \
+--- OpenSees-3.1.0/MAKES/Makefile.def.EC2-REDHAT-ENTERPRISE.orig	2019-11-16 11:48:05.000000000 -0800
++++ OpenSees-3.1.0/MAKES/Makefile.def.EC2-REDHAT-ENTERPRISE	2020-03-05 12:22:08.185000000 -0800
+@@ -45,7 +45,8 @@
+ # Specify the location and name of the OpenSees interpreter program
+ # that will be created (if this all works!)
+ 
+-OpenSees_PROGRAM = $(HOME)/bin/OpenSees
++MKDIR = mkdir -p
++OpenSees_PROGRAM = $(OSBDIR)/bin/OpenSees
+ 
+ OPERATING_SYSTEM = LINUX
+ GRAPHICS = NONE
+@@ -64,19 +65,18 @@
+ # remove the directory from DIRS.
+ 
+ BASE		= /usr/local
+-FE		= $(HOME)/OpenSees/SRC
+-
+-AMDdir       = $(HOME)/OpenSees/OTHER/AMD
+-BLASdir      = $(HOME)/OpenSees/OTHER/BLAS
+-CBLASdir     = $(HOME)/OpenSees/OTHER/CBLAS
+-LAPACKdir    = $(HOME)/OpenSees/OTHER/LAPACK
+-SUPERLUdir   = $(HOME)/OpenSees/OTHER/SuperLU_5.1.1/SRC
+-ARPACKdir    = $(HOME)/OpenSees/OTHER/ARPACK
+-UMFPACKdir   = $(HOME)/OpenSees/OTHER/UMFPACK
+-METISdir     = $(HOME)/OpenSees/OTHER/METIS
+-CSPARSEdir   = $(HOME)/OpenSees/OTHER/CSPARSE
+-SRCdir       = $(HOME)/OpenSees/SRC
++FE = $(OSBDIR)/SRC
+ 
++AMDdir       = $(OSBDIR)/OTHER/AMD
++BLASdir      = $(OSBDIR)/OTHER/BLAS
++CBLASdir     = $(OSBDIR)/OTHER/CBLAS
++LAPACKdir    = $(OSBDIR)/OTHER/LAPACK
++SUPERLUdir   = $(OSBDIR)/OTHER/SuperLU_5.1.1/SRC
++ARPACKdir    = $(OSBDIR)/OTHER/ARPACK
++UMFPACKdir   = $(OSBDIR)/OTHER/UMFPACK
++METISdir     = $(OSBDIR)/OTHER/METIS
++CSPARSEdir   = $(OSBDIR)/OTHER/CSPARSE
++SRCdir       = $(OSBDIR)/SRC
+ 
+ DIRS        = $(BLASdir) $(CBLASdir) $(LAPACKdir) $(AMDdir) $(CSPARSEdir) \
+ 	$(SUPERLUdir) $(ARPACKdir) $(UMFPACKdir) $(SRCdir) $(METISdir)
+@@ -96,21 +96,21 @@
+ # Note: For libraries that will be created (any in DIRS above)
+ # make sure the directory exsists where you want the library to go!
+ 
+-FE_LIBRARY      = $(HOME)/lib/libOpenSees.a
+-NDARRAY_LIBRARY = $(HOME)/lib/libndarray.a # BJ_UCD jeremic@ucdavis.edu
+-MATMOD_LIBRARY  = $(HOME)/lib/libmatmod.a  # BJ_UCD jeremic@ucdavis.edu
+-BJMISC_LIBRARY  = $(HOME)/lib/libBJmisc.a  # BJ_UCD jeremic@ucdavis.edu
+-LAPACK_LIBRARY  = $(HOME)/lib/libLapack.a
+-BLAS_LIBRARY    = $(HOME)/lib/libBlas.a
+-SUPERLU_LIBRARY = $(HOME)/lib/libSuperLU.a
+-CBLAS_LIBRARY   = $(HOME)/lib/libCBlas.a
+-CSPARSE_LIBRARY   = $(HOME)/lib/libCBlas.a
+-ARPACK_LIBRARY  = $(HOME)/lib/libArpack.a
+-AMD_LIBRARY  = $(HOME)/lib/libAMD.a
+-UMFPACK_LIBRARY = $(HOME)/lib/libUmfpack.a
+-METIS_LIBRARY   = $(HOME)/lib/libMetis.a
++FE_LIBRARY      = $(OSBDIR)/lib/libOpenSees.a
++NDARRAY_LIBRARY = $(OSBDIR)/lib/libndarray.a # BJ_UCD jeremic@ucdavis.edu
++MATMOD_LIBRARY  = $(OSBDIR)/lib/libmatmod.a  # BJ_UCD jeremic@ucdavis.edu
++BJMISC_LIBRARY  = $(OSBDIR)/lib/libBJmisc.a  # BJ_UCD jeremic@ucdavis.edu
++LAPACK_LIBRARY  = $(OSBDIR)/lib/libLapack.a
++BLAS_LIBRARY    = $(OSBDIR)/lib/libBlas.a
++SUPERLU_LIBRARY = $(OSBDIR)/lib/libSuperLU.a
++CBLAS_LIBRARY   = $(OSBDIR)/lib/libCBlas.a
++CSPARSE_LIBRARY   = $(OSBDIR)/lib/libCBlas.a
++ARPACK_LIBRARY  = $(OSBDIR)/lib/libArpack.a
++AMD_LIBRARY  = $(OSBDIR)/lib/libAMD.a
++UMFPACK_LIBRARY = $(OSBDIR)/lib/libUmfpack.a
++METIS_LIBRARY   = $(OSBDIR)/lib/libMetis.a
+ TCL_LIBRARY = /usr/lib64/libtcl8.5.so
+-BLITZ_LIBRARY = $(HOME)/blitz/lib/libblitz.a
++BLITZ_LIBRARY = $(OSBDIR)/blitz/lib/libblitz.a
+ GRAPHIC_LIBRARY     = 
+ 
+ # WATCH OUT .. These libraries are removed when 'make wipe' is invoked.
+@@ -132,9 +132,9 @@
+ # %---------------------------------------------------------%
+ 
+ # Compilers
+-CC++	= /usr/bin/g++
+-CC      = /usr/bin/gcc
+-FC	= /usr/bin/gfortran
++CC++	= g++
++CC      = gcc
++FC	= gfortran
+ 
+ AR		= ar 
+ ARFLAGS		= cqls
+@@ -174,7 +174,7 @@
+ 
+ # Linker
+ LINKER          = $(CC++)
+-LINKFLAGS       = -rdynamic -Wl
++LINKFLAGS       = -rdynamic -W
+ 
+ endif
+ 
+@@ -232,7 +232,7 @@
+ # | platform specific and typically order does matter!!     |
+ # %---------------------------------------------------------%
+ MACHINE_LINKLIBS  = -L$(BASE)/lib \
+-		-L$(HOME)/lib 
++		-L$(OSBDIR)/lib 
+ 
+ MACHINE_NUMERICAL_LIBS  = -lm \
+ 		$(ARPACK_LIBRARY) \
+@@ -255,7 +255,7 @@
+ MACHINE_INCLUDES        = -I/usr/include \
+ 			  -I$(BASE)/include \
+ 			  -I/usr/include/cxx \
+-			  -I$(HOME)/include -I$(HOME)/blitz
++			  -I$(OSBDIR)/include -I$(OSBDIR)/blitz
+ 
+ # this file contains all the OpenSees/SRC includes
+ include $(FE)/Makefile.incl
