@@ -12,6 +12,3 @@
       - "{{compiler}}/{{compiler_version}}"
     setenv:
       -  OPENSEES_DIR {{root}}
-  requires:
-    - "{{name}}_{{version}}"
-    - rcic-module-support
