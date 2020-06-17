@@ -34,4 +34,4 @@
      installextra: $(INSTALL) -m 644  README COPY* $(ROOT){{root}} 
   requires:
     - "{{compiler}}_{{compiler_version}}" 
-  rpmFilters: *Requires
+  rpmFilters: *filterRequires
