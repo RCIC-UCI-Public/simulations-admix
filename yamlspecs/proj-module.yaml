@@ -1,0 +1,19 @@
+# builds the module for proj
+!include proj.yaml
+!include rcic-module.yaml
+---
+- package: proj Module
+  category: LIBRARIES
+  module:
+    prepend_path:
+      - *Prepend_path
+      - -d " " CPPFLAGS -I{{root}}/include
+      - -d " " LDFLAGS "-L{{root}}/lib -Wl,-rpath,{{root}}/lib"
+    setenv:
+      -  PROJ_HOME {{root}}
+    prereq: 
+      - *ModuleCompiler_prereq
+      - sqlite3/{{versions.sqlite3.version}}
+    requires: 
+      - *ModuleCompiler_requires
+      - sqlite3_{{versions.sqlite3.version}}-module

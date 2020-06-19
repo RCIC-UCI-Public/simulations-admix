@@ -1,0 +1,15 @@
+# builds the module for sqlite3
+!include sqlite3.yaml
+!include rcic-module.yaml
+---
+- package: sqlite3 Module
+  category: LIBRARIES
+  module:
+    prepend_path:
+      - *Prepend_path
+      - -d " " CPPFLAGS -I{{root}}/include
+      - -d " " LDFLAGS "-L{{root}}/lib -Wl,-rpath,{{root}}/lib"
+    prereq: 
+      - *ModuleCompiler_prereq
+    requires: 
+      - *ModuleCompiler_requires

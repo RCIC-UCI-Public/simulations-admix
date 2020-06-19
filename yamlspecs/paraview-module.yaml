@@ -1,0 +1,26 @@
+# Builds the module for paraview
+!include paraview.yaml
+!include rcic-module.yaml
+---
+- package: paraview module 
+  category: PHYSICS
+  module:
+    lib: lib64
+    prepend_path:
+      - *Prepend_path
+      - PYTHONPATH {{root}}/{{module.lib}}/python{{versions.python.version_major}}/site-packages
+    setenv:
+      - *Setenv
+      - PARAVIEW_HOME {{root}}
+    prereq:
+      - *ModuleCompilerMpi_prereq
+      - python/{{versions.python.version}}
+      - intel-tbb/{{versions.tbb}}
+      - ffmpeg/{{versions.ffmpeg}}
+      - gdal/{{versions.gdal}}
+    requires:
+      - *ModuleCompilerMpi_requires
+      - python_{{versions.python.version}}-module
+      - intel-tbb_{{versions.tbb}}-module
+      - ffmpeg_{{versions.ffmpeg}}-module
+      - gdal_{{versions.gdal}}-module
