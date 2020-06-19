@@ -1,0 +1,5 @@
+# Build module for scotch
+!include scotch.yaml
+!include rcic-module.yaml
+---
+- category: PHYSICS
