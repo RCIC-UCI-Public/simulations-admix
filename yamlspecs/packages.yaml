@@ -1,7 +1,27 @@
 system:
+  - flex
+  - bison
+  - libX11-devel
+  - libXt-devel
+  - mesa-libGL-devel
+  - qt5-qtbase-devel
+  - qt5-qtx11extras-devel
+  - qt5-qttools-devel
+  - qt5-qtxmlpatterns-devel
 bootstrap:
+  - sqlite3
+  - sqlite3-module
+  - proj
+  - proj-module
+  - gdal
+  - gdal-module
+  - paraview
+  - paraview-module
+  - scotch
+  - scotch-module
 build:
-   - opensees
-   - opensees-module
+  - opensees
+  - opensees-module
 manifest:
-   - "{{build}}"
+  - "{{bootstrap}}"
+  - "{{build}}"
