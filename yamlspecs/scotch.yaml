@@ -24,14 +24,14 @@
     pkgmake: >
       cd src;
       cp Make.inc/Makefile.inc.x86-64_pc_linux2 Makefile.inc;
-      sed -i -e 's/CFLAGS\t\t=/CFLAGS = \$(CPPFLAGS)/' -e 's/LDFLAGS/LDLIBS/' Makefile.inc;
-      sed -i '/LDLIBS/a LDFLAGS += \$(LDLIBS)' Makefile.inc;
-      make
+      sed -i -e 's/CFLAGS\t\t=/CFLAGS = $$(CPPFLAGS)/' -e 's/LDFLAGS/LDLIBS/' Makefile.inc;
+      sed -i '/LDLIBS/a LDFLAGS += $$(LDLIBS)' Makefile.inc;
+      make scotch ptscotch
   install:
     makeinstall: >
       cd src;
       make prefix=$(ROOT){{root}} install
-    installextra: $(INSTALL) -m 644  LICENSE* README.txt $(ROOT){{root}} 
+    installextra: $(INSTALL) -m 644  ../LICENSE* ../README.txt $(ROOT){{root}} 
 # does not need as scotch libraries are static
 # binaries dependencies do not include either gcc or openmpi
 #  requires:
