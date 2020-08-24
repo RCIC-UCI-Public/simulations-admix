@@ -4,6 +4,7 @@
 ---
 - package: gdal Module
   category: LIBRARIES
+  release: 2
   module:
     prepend_path:
       - *Prepend_path
@@ -17,5 +18,4 @@
       - proj/{{versions.proj}}
     requires: 
       - *ModuleCompiler_requires
-      - sqlite3_{{versions.sqlite3.version}}-module
-      - proj_{{versions.proj}}-module
+      - "{{module.prereq}}" 
