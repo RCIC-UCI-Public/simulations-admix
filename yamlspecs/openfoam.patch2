@@ -1,0 +1,55 @@
+diff -Naur etc/bashrc etc.save/bashrc
+--- etc/bashrc	2020-05-08 03:49:05.000000000 -0700
++++ etc.save/bashrc	2020-09-04 16:22:25.828607744 -0700
+@@ -32,7 +32,7 @@
+ #------------------------------------------------------------------------------
+ 
+ export WM_PROJECT=OpenFOAM
+-export WM_PROJECT_VERSION=7
++export WM_PROJECT_VERSION=7-20200508
+ 
+ ################################################################################
+ # USER EDITABLE PART: Changes made here may be lost with the next upgrade
+@@ -45,6 +45,7 @@
+ [ "$BASH" -o "$ZSH_NAME" ] && \
+ export FOAM_INST_DIR=$(cd $(dirname ${BASH_SOURCE:-$0})/../.. && pwd -P) || \
+ export FOAM_INST_DIR=$HOME/$WM_PROJECT
++export FOAM_INST_DIR=/tmp/OpenFOAM/7
+ # export FOAM_INST_DIR=~$WM_PROJECT
+ # export FOAM_INST_DIR=/opt/$WM_PROJECT
+ # export FOAM_INST_DIR=/usr/local/$WM_PROJECT
+diff -Naur etc/config.sh/paraview etc.save/config.sh/paraview
+--- etc/config.sh/paraview	2020-05-08 03:49:05.000000000 -0700
++++ etc.save/config.sh/paraview	2020-09-04 13:26:19.467607744 -0700
+@@ -67,7 +67,8 @@
+ #export ParaView_VERSION=5.0.1
+ #export ParaView_VERSION=5.4.0
+ #export ParaView_VERSION=5.5.0
+-export ParaView_VERSION=5.6.0
++#export ParaView_VERSION=5.6.0
++export ParaView_VERSION=5.8.0
+ export ParaView_MAJOR=detect
+ 
+ #export ParaView_GL=system
+@@ -110,7 +111,7 @@
+ paraviewInstDir=$WM_THIRD_PARTY_DIR/ParaView-$ParaView_VERSION
+ paraviewArchName=ParaView-$ParaView_VERSION
+ 
+-export ParaView_DIR=$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/$paraviewArchName
++export ParaView_DIR=$paraview__PREFIX
+ 
+ # Set paths if binaries or source are present
+ if [ -r $ParaView_DIR -o -r $paraviewInstDir ]
+diff -Naur etc/config.sh/scotch etc.save/config.sh/scotch
+--- etc/config.sh/scotch	2020-05-08 03:49:05.000000000 -0700
++++ etc.save/config.sh/scotch	2020-09-04 13:27:35.990607744 -0700
+@@ -37,7 +37,7 @@
+ #
+ #------------------------------------------------------------------------------
+ 
+-export SCOTCH_VERSION=scotch_6.0.6
+-export SCOTCH_ARCH_PATH=$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER$WM_PRECISION_OPTION$WM_LABEL_OPTION/$SCOTCH_VERSION
++export SCOTCH_VERSION=scotch_6.0.9
++export SCOTCH_ARCH_PATH=$scotch__PREFIX
+ 
+ #------------------------------------------------------------------------------
