@@ -1,0 +1,42 @@
+!include rcic-package.yaml
+!include rpm.yaml
+---
+- package: OpenFoam
+  name: openfoam 
+  versions: !include versions.yaml 
+  version: "{{versions.openfoam.version}}"
+  version_rel: "{{versions.openfoam.release}}"
+  compiler: "{{versions.compiler.name}}"
+  compiler_version: "{{versions.compiler.version}}"
+  vendor_source: https://github.com/OpenFOAM/OpenFOAM-{{version}}/archive/{{version_rel}}.{{extension}}
+  src_tarball: OpenFOAM-{{version}}-{{version_rel}}.{{extension}}
+  src_dir: OpenFOAM-{{version}}-{{version_rel}}
+#  addfile: 
+#    - "filter-requires-{{name}}.sh"
+  description: |
+    OpenFOAM {{version}} is the leading free, open source software for computational fluid dynamics (CFD),
+    owned by the OpenFOAM Foundation and distributed exclusively under the General Public Licence (GPL).
+    See https://openfoam.org for more info. Current release is {{version_rel}}
+#  src_dir: OpenSees-{{version}}
+  build:
+#    patchfile: opensees.patch
+    configure: no configure required
+    modules: 
+      - "{{compiler}}/{{compiler_version}}"
+      - scotch/{{versions.scotch}}
+      - cgal/{{versions.cgal}}
+      - paraview/{{versions.paraview.version}}
+    target: 
+    pkgmake: >
+      make
+  install:
+     makeinstall: >
+       mkdir -p $(ROOT){{root}}/bin;
+       $(INSTALL) -m 755 bin/* $(ROOT){{root}}/bin;
+       cp -p -r lib/ EXAMPLES/ SCRIPTS/ $(ROOT){{root}}
+     installextra: $(INSTALL) -m 644  README COPY* $(ROOT){{root}} 
+  requires:
+    - "{{compiler}}_{{compiler_version}}" 
+    - scotch_{{versions.scotch}}
+    - cgal_{{versions.cgal}}
+    - paraview_{{versions.paraview.version}}
