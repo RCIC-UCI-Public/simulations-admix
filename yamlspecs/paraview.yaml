@@ -6,6 +6,7 @@
   versions: !include versions.yaml 
   version: "{{versions.paraview.version}}"
   version_rel: "{{versions.paraview.version_rel}}"
+  release: 3
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
   mpi: "{{versions.mpi.name}}"
