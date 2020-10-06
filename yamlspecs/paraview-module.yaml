@@ -5,7 +5,6 @@
 - package: paraview module 
   category: PHYSICS
   module:
-    lib: lib64
     prepend_path:
       - *Prepend_path
       - PYTHONPATH {{root}}/{{module.lib}}/python{{versions.python.version_major}}/site-packages

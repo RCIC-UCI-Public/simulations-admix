@@ -1,0 +1,39 @@
+!include rcic-package.yaml
+!include rpm.yaml
+---
+- package: CGAL
+  name: cgal 
+  versions: !include versions.yaml 
+  version: "{{versions.cgal}}"
+  compiler: "{{versions.compiler.name}}"
+  compiler_version: "{{versions.compiler.version}}"
+  mpi: "{{versions.mpi.name}}"
+  mpi_version: "{{versions.mpi.version}}"
+  vendor_source: wget https://github.com/CGAL/cgal/archive/releases/{{package}}-{{version}}.{{extension}}
+  src_dir: "{{name}}-releases-{{package}}-{{version}}"
+  description: |
+    CGAL {{version}} is a software project that provides easy access to efficient and reliable 
+    geometric algorithms in the form of a C++ library. CGAL is used in various areas
+    needing geometric computation, such as geographic information systems, computer 
+    aided design, molecular biology, medical imaging, computer graphics, and robotics.
+    See https://www.cgal.org and https://doc.cgal.org/latest/Manual/general_intro.html
+  build:
+    configure_args:
+    configure: >
+      (mkdir builddir;
+      cd builddir;
+      export CMAKE_INCLUDE_PATH=$$GCC_INSTALL_PREFIX/include:$$CMAKE_INCLUDE_PATH;
+      export CMAKE_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$CMAKE_LIBRARY_PATH;
+      cmake -DCGAL_HEADER_ONLY=OFF -DCMAKE_BUILD_TYPE=Release --prefix={{root}} .. )
+    modules: 
+      - foundation
+      - "{{compiler}}/{{compiler_version}}"
+    target: 
+    pkgmake: make -C builddir -j 8
+  install:
+    makeinstall: >
+      cd builddir; 
+      cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
+  requires:
+    - "{{compiler}}_{{compiler_version}}"
+    - "{{compiler}}_{{compiler_version}}-mpfr"

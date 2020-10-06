@@ -4,22 +4,21 @@
 - package: ParaView
   name: paraview 
   versions: !include versions.yaml 
-  version: "{{versions.paraview}}"
+  version: "{{versions.paraview.version}}"
+  version_rel: "{{versions.paraview.version_rel}}"
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
   mpi: "{{versions.mpi.name}}"
   mpi_version: "{{versions.mpi.version}}"
   baseurl: https://www.paraview.org/paraview-downloads/download.php?
-  urlargs: submit=Download&version=v5.8&type=source&os=Sources&downloadFile={{package}}-v{{version}}.{{extension}}
+  urlargs: submit=Download&version=v{{version_rel}}&type=source&os=Sources&downloadFile={{package}}-v{{version}}.{{extension}}
   vendor_source: "{{baseurl}}{{urlargs}}"
-# no, has no dependent packages
-#  vendor_source: https://gitlab.kitware.com/paraview/paraview/-/archive/v{{version}}/{{name}}-v{{version}}.{{extension}}
   src_dir: "{{package}}-v{{version}}"
   description: |
     ParaView is an open-source, multi-platform data analysis and visualization 
     application based on Visualization Toolkit (VTK). Home URL https://www.paraview.org
   OPTS1: "-DPARAVIEW_USE_PYTHON=ON -DPARAVIEW_USE_MPI=ON -DPARAVIEW_ENABLE_GDAL=ON -DPARAVIEW_ENABLE_FFMPEG=ON"
-  OPTS2: "-DCMAKE_BUILD_TYPE=Release -GNinja"
+  OPTS2: "-DCMAKE_BUILD_TYPE=Release -DPARAVIEW_INSTALL_DEVELOPMENT_FILES=ON -GNinja"
   build:
     configure: >
       (mkdir builddir;
@@ -27,7 +26,6 @@
       export CMAKE_INCLUDE_PATH=$$FFMPEG_INC:$$GDAL_HOME/include:$$CMAKE_INCLUDE_PATH;
       export CMAKE_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$CMAKE_LIBRARY_PATH;
       cmake {{OPTS1}} {{OPTS2}} --prefix={{root}} ..)
-#      cmake -GNinja -DPARAVIEW_USE_PYTHON=ON -DPARAVIEW_USE_MPI=ON -DPARAVIEW_ENABLE_GDAL=ON -DPARAVIEW_ENABLE_FFMPEG=ON -DCMAKE_BUILD_TYPE=Release --prefix={{root}} ..)
     configure_args: 
     modules: 
       - foundation

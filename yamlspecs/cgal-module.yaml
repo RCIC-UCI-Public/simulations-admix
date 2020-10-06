@@ -1,0 +1,18 @@
+# Builds the module for cgal
+!include cgal.yaml
+!include rcic-module.yaml
+---
+- package: cgal module 
+  category: LIBRARIES
+  module:
+    lib: lib64
+    prepend_path:
+      - MANPATH {{root}}/share/man
+      - LD_LIBRARY_PATH {{root}}/{{module.lib}}
+    setenv:
+      - *Setenv
+      - CGAL_HOME {{root}}
+    prereq:
+      - *ModuleCompiler_prereq
+    requires:
+      - *ModuleCompiler_requires
