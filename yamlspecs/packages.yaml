@@ -19,6 +19,8 @@ bootstrap:
   - paraview-module
   - scotch
   - scotch-module
+  - cgal
+  - cgal-module
 build:
   - opensees
   - opensees-module
