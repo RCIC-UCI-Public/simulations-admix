@@ -26,6 +26,8 @@ build:
   - opensees-module
   - dream3d
   - dream3d-module
+  - openfoam
+  - openfoam-module
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"

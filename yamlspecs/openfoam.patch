@@ -1,6 +1,6 @@
-diff -Naur etc/bashrc etc.save/bashrc
---- etc/bashrc	2020-05-08 03:49:05.000000000 -0700
-+++ etc.save/bashrc	2020-09-04 13:25:05.522607744 -0700
+diff -Naur OpenFOAM-7-20200508/etc/bashrc OpenFOAM-7-20200508/etc.save/bashrc
+--- OpenFOAM-7-20200508/etc/bashrc	2020-05-08 03:49:05.000000000 -0700
++++ OpenFOAM-7-20200508/etc.save/bashrc	2020-09-04 13:25:05.522607744 -0700
 @@ -32,7 +32,7 @@
  #------------------------------------------------------------------------------
  
@@ -10,9 +10,9 @@ diff -Naur etc/bashrc etc.save/bashrc
  
  ################################################################################
  # USER EDITABLE PART: Changes made here may be lost with the next upgrade
-diff -Naur etc/config.sh/paraview etc.save/config.sh/paraview
---- etc/config.sh/paraview	2020-05-08 03:49:05.000000000 -0700
-+++ etc.save/config.sh/paraview	2020-09-04 13:26:19.467607744 -0700
+diff -Naur OpenFOAM-7-20200508/etc/config.sh/paraview OpenFOAM-7-20200508/etc.save/config.sh/paraview
+--- OpenFOAM-7-20200508/etc/config.sh/paraview	2020-05-08 03:49:05.000000000 -0700
++++ OpenFOAM-7-20200508/etc.save/config.sh/paraview	2020-09-04 13:26:19.467607744 -0700
 @@ -67,7 +67,8 @@
  #export ParaView_VERSION=5.0.1
  #export ParaView_VERSION=5.4.0
@@ -32,9 +32,9 @@ diff -Naur etc/config.sh/paraview etc.save/config.sh/paraview
  
  # Set paths if binaries or source are present
  if [ -r $ParaView_DIR -o -r $paraviewInstDir ]
-diff -Naur etc/config.sh/scotch etc.save/config.sh/scotch
---- etc/config.sh/scotch	2020-05-08 03:49:05.000000000 -0700
-+++ etc.save/config.sh/scotch	2020-09-04 13:27:35.990607744 -0700
+diff -Naur OpenFOAM-7-20200508/etc/config.sh/scotch OpenFOAM-7-20200508/etc.save/config.sh/scotch
+--- OpenFOAM-7-20200508/etc/config.sh/scotch	2020-05-08 03:49:05.000000000 -0700
++++ OpenFOAM-7-20200508/etc.save/config.sh/scotch	2020-09-04 13:27:35.990607744 -0700
 @@ -37,7 +37,7 @@
  #
  #------------------------------------------------------------------------------

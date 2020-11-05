@@ -11,30 +11,32 @@
   vendor_source: https://github.com/OpenFOAM/OpenFOAM-{{version}}/archive/{{version_rel}}.{{extension}}
   src_tarball: OpenFOAM-{{version}}-{{version_rel}}.{{extension}}
   src_dir: OpenFOAM-{{version}}-{{version_rel}}
-#  addfile: 
-#    - "filter-requires-{{name}}.sh"
   description: |
     OpenFOAM {{version}} is the leading free, open source software for computational fluid dynamics (CFD),
     owned by the OpenFOAM Foundation and distributed exclusively under the General Public Licence (GPL).
     See https://openfoam.org for more info. Current release is {{version_rel}}
-#  src_dir: OpenSees-{{version}}
   build:
-#    patchfile: opensees.patch
+    patchfile: openfoam.patch
     configure: no configure required
     modules: 
       - "{{compiler}}/{{compiler_version}}"
       - scotch/{{versions.scotch}}
       - cgal/{{versions.cgal}}
       - paraview/{{versions.paraview.version}}
+      - foundation
     target: 
     pkgmake: >
-      make
+      export FFMPEG_INCLUDE_DIRS=$$FFMPEG_INC;
+      export FFMPEG_LIBRARIES=$$FFMPEG_LIB;
+      export CMAKE_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$CMAKE_LIBRARY_PATH;
+      . etc/bashrc;
+      ./Allwmake 
   install:
      makeinstall: >
-       mkdir -p $(ROOT){{root}}/bin;
-       $(INSTALL) -m 755 bin/* $(ROOT){{root}}/bin;
-       cp -p -r lib/ EXAMPLES/ SCRIPTS/ $(ROOT){{root}}
-     installextra: $(INSTALL) -m 644  README COPY* $(ROOT){{root}} 
+       rm -rf platforms/linux64GccDPInt32Opt/applications;
+       rm -rf platforms/linux64GccDPInt32Opt/src;
+       mkdir -p $(ROOT){{root}};
+       mv COPY* applications/ bin/ doc/ etc/ platforms/ src/ test/ tutorials/ wmake/ $(ROOT){{root}}
   requires:
     - "{{compiler}}_{{compiler_version}}" 
     - scotch_{{versions.scotch}}
