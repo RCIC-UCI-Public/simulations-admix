@@ -3,3 +3,4 @@
 !include rcic-module.yaml
 ---
 - category: PHYSICS
+  release: 2

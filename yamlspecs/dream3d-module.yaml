@@ -1,0 +1,7 @@
+# builds the module for dream3d
+!include dream3d.yaml
+!include rcic-module.yaml
+---
+- package: dream3d Module
+  category: TOOLS
+  release: 2

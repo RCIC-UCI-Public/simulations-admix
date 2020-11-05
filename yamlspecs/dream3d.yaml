@@ -1,0 +1,24 @@
+!include rcic-package.yaml
+!include rpm.yaml
+---
+- package: dream3d 
+  name: dream3d 
+  versions: !include versions.yaml 
+  version: "{{versions.dream3d}}"
+  vendor_source: http://dream3d.bluequartz.net/?page_id=525 
+  description: |
+    DREAM.3D version {{version}} consists of data analysis tools (Filters) that 
+    allow for the construction of customized workflows (Pipelines) to analyze data. 
+    DREAM.3D provides a flexible and extensible data structure that eases data transport 
+    between collaborators by storing data in a non-proprietary format.
+  src_dir:  DREAM3D-{{version}}-Linux-x86_64
+  src_tarball: "{{src_dir}}.{{extension}}"
+  build:
+    configure: no configure required. Binary release
+    target: 
+    pkgmake: echo prebuilt binary 
+  install:
+     makeinstall: >
+       $(TAR) cf - * | (cd $(ROOT){{root}}; tar xvf -)    
+  rpm:
+    extras: *RpmNone

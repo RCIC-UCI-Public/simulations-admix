@@ -4,6 +4,7 @@
 ---
 - package: paraview module 
   category: PHYSICS
+  release: 2
   module:
     prepend_path:
       - *Prepend_path
@@ -19,7 +20,4 @@
       - gdal/{{versions.gdal}}
     requires:
       - *ModuleCompilerMpi_requires
-      - python_{{versions.python.version}}-module
-      - intel-tbb_{{versions.tbb}}-module
-      - ffmpeg_{{versions.ffmpeg}}-module
-      - gdal_{{versions.gdal}}-module
+      - "{{module.prereq}}"
