@@ -1,0 +1,5 @@
+# Build module for jags
+!include jags.yaml
+!include rcic-module.yaml
+---
+- category: STATISTICS

@@ -28,6 +28,8 @@ build:
   - dream3d-module
   - openfoam
   - openfoam-module
+  - jags
+  - jags-module
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"

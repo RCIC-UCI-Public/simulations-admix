@@ -1,0 +1,27 @@
+!include rcic-package.yaml
+---
+- package: JAGS
+  name: jags 
+  versions: !include versions.yaml 
+  version: "{{versions.jags}}"
+  compiler: "{{versions.compiler.name}}"
+  compiler_version: "{{versions.compiler.version}}"
+  vendor_source: https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Source/JAGS-{{version}}.{{extension}}
+  src_dir: JAGS-{{version}}
+  description: |
+    JAGS {{version}} is Just Another Gibbs Sampler. It is a program
+    for the statistical analysis of Bayesian hierarchical models
+    by Markov Chain Monte Carlo. See https://sourceforge.net/projects/mcmc-jags
+  build:
+    configure: ./configure
+    modules: 
+      - "{{compiler}}/{{compiler_version}}"
+    target: 
+    pkgmake: make -j 8
+  install:
+     makeinstall: >
+       make DESTDIR=$(ROOT) install
+     installextra: $(INSTALL) -m 644  README* COPYING AUTHORS $(ROOT){{root}} 
+  requires:
+    - "{{compiler}}_{{compiler_version}}" 
+  rpm: !include rpm.extras.yaml
