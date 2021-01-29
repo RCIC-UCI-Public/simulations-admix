@@ -3,3 +3,10 @@
 !include rcic-module.yaml
 ---
 - category: STATISTICS
+  release: 2
+  module:
+    prereq: 
+      - *ModuleCompiler_prereq
+    requires: 
+      - *ModuleCompiler_requires
+      - "{{module.prereq}}"
