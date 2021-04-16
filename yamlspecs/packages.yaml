@@ -8,6 +8,8 @@ system:
   - qt5-qtx11extras-devel
   - qt5-qttools-devel
   - qt5-qtxmlpatterns-devel
+  - qt5-qtsvg-devel
+  - boost-devel
 bootstrap:
   - sqlite3
   - sqlite3-module
