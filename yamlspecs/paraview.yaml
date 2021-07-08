@@ -1,14 +1,10 @@
-!include rcic-package.yaml
-!include rpm.yaml
+!include common.yaml
 ---
 - package: ParaView
   name: paraview 
-  versions: !include versions.yaml 
   version: "{{versions.paraview.version}}"
   version_rel: "{{versions.paraview.version_rel}}"
   release: 3
-  compiler: "{{versions.compiler.name}}"
-  compiler_version: "{{versions.compiler.version}}"
   mpi: "{{versions.mpi.name}}"
   mpi_version: "{{versions.mpi.version}}"
   baseurl: https://www.paraview.org/paraview-downloads/download.php?
@@ -27,15 +23,15 @@
       export CMAKE_INCLUDE_PATH=$$FFMPEG_INC:$$GDAL_HOME/include:$$CMAKE_INCLUDE_PATH;
       export CMAKE_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$CMAKE_LIBRARY_PATH;
       cmake {{OPTS1}} {{OPTS2}} --prefix={{root}} ..)
-    configure_args: 
-    modules: 
-      - foundation
+    base_modules: 
       - python/{{versions.python.version}}
       - intel-tbb/{{versions.tbb}}
-      - "{{compiler}}/{{compiler_version}}"
       - "{{mpi}}/{{mpi_version}}/{{compiler}}.{{compiler_version}}"
       - ffmpeg/{{versions.ffmpeg}}
       - gdal/{{versions.gdal}}
+    modules: 
+      - foundation
+      - "{{build.base_modules}}"
     pkgmake: ninja -C builddir
   install:
     makeinstall: >
@@ -44,7 +40,6 @@
   requires:
     - python_{{versions.python.version}}
     - intel-tbb_{{versions.tbb}}
-    - "{{compiler}}_{{compiler_version}}"
     - "{{mpi}}_{{mpi_version}}_{{compiler}}_{{compiler_version}}"
     - ffmpeg_{{versions.ffmpeg}}
     - gdal_{{versions.gdal}}

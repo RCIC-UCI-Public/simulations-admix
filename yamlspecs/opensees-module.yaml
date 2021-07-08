@@ -1,8 +1,7 @@
-# builds the module for opensees
 !include opensees.yaml
 !include rcic-module.yaml
 ---
-- package: opensees Module
+- package: opensees module
   category: PHYSICS
   release: 2
   module:
@@ -11,7 +10,3 @@
       - LD_LIBRARY_PATH {{root}}/lib
     setenv:
       -  OPENSEES_DIR {{root}}
-    prereq: 
-      - *ModuleCompiler_prereq
-    requires: 
-      - *ModuleCompiler_requires

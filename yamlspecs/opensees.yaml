@@ -1,12 +1,8 @@
-!include rcic-package.yaml
-!include rpm.yaml
+!include common.yaml
 ---
 - package: OpenSees
   name: opensees 
-  versions: !include versions.yaml 
   version: "{{versions.opensees}}"
-  compiler: "{{versions.compiler.name}}"
-  compiler_version: "{{versions.compiler.version}}"
   vendor_source: https://github.com/OpenSees/OpenSees/archive/v{{version}}.{{extension}}
   addfile: 
     - "filter-requires-{{name}}.sh"
@@ -17,21 +13,15 @@
   src_dir: OpenSees-{{version}}
   build:
     patchfile: opensees.patch
-    configure: no configure required
-    modules: 
-      - "{{compiler}}/{{compiler_version}}"
-    target: 
     pkgmake: >
       export OSBDIR=`pwd`;
       cp MAKES/Makefile.def.EC2-REDHAT-ENTERPRISE Makefile.def;
       (sed -i 's/$$(HOME)/$$(OSBDIR)/' SRC/system_of_eqn/linearSOE/BJsolvers/Makefile SRC/system_of_eqn/linearSOE/mumps/Makefile SRC/reliability/Makefile SRC/Makefile SRC/optimization/Makefile SRC/java/Makefile);
       make
+  extras: README COPY*
   install:
      makeinstall: >
        mkdir -p $(ROOT){{root}}/bin;
        $(INSTALL) -m 755 bin/* $(ROOT){{root}}/bin;
        cp -p -r lib/ EXAMPLES/ SCRIPTS/ $(ROOT){{root}}
-     installextra: $(INSTALL) -m 644  README COPY* $(ROOT){{root}} 
-  requires:
-    - "{{compiler}}_{{compiler_version}}" 
   rpmFilters: *filterRequires

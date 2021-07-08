@@ -1,13 +1,9 @@
-!include rcic-package.yaml
-!include rpm.yaml
+!include common.yaml
 ---
 - package: OpenFoam
   name: openfoam 
-  versions: !include versions.yaml 
   version: "{{versions.openfoam.version}}"
   version_rel: "{{versions.openfoam.release}}"
-  compiler: "{{versions.compiler.name}}"
-  compiler_version: "{{versions.compiler.version}}"
   vendor_source: https://github.com/OpenFOAM/OpenFOAM-{{version}}/archive/{{version_rel}}.{{extension}}
   src_tarball: OpenFOAM-{{version}}-{{version_rel}}.{{extension}}
   src_dir: OpenFOAM-{{version}}-{{version_rel}}
@@ -17,14 +13,14 @@
     See https://openfoam.org for more info. Current release is {{version_rel}}
   build:
     patchfile: openfoam.patch
-    configure: no configure required
-    modules: 
+    base_modules: 
       - "{{compiler}}/{{compiler_version}}"
       - scotch/{{versions.scotch}}
       - cgal/{{versions.cgal}}
       - paraview/{{versions.paraview.version}}
+    modules: 
+      - "{{build.base_modules}}"
       - foundation
-    target: 
     pkgmake: >
       export FFMPEG_INCLUDE_DIRS=$$FFMPEG_INC;
       export FFMPEG_LIBRARIES=$$FFMPEG_LIB;

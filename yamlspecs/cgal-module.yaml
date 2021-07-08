@@ -1,4 +1,3 @@
-# Builds the module for cgal
 !include cgal.yaml
 !include rcic-module.yaml
 ---
@@ -13,6 +12,4 @@
       - *Setenv
       - CGAL_HOME {{root}}
     prereq:
-      - *ModuleCompiler_prereq
-    requires:
-      - *ModuleCompiler_requires
+      - "{{build.base_modules}}"
