@@ -3,6 +3,7 @@
 ---
 - package: scotch
   name: scotch 
+  release: 2
   versions: !include versions.yaml 
   version: "{{versions.scotch}}"
   compiler: "{{versions.compiler.name}}"
