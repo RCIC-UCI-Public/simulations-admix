@@ -3,6 +3,7 @@
 ---
 - package: OpenFoam
   name: openfoam 
+  release: 2
   versions: !include versions.yaml 
   version: "{{versions.openfoam.version}}"
   version_rel: "{{versions.openfoam.release}}"
@@ -28,6 +29,7 @@
     pkgmake: >
       export FFMPEG_INCLUDE_DIRS=$$FFMPEG_INC;
       export FFMPEG_LIBRARIES=$$FFMPEG_LIB;
+      export CMAKE_INCLUDE_PATH=$$FFMPEG_INC:$$GDAL_HOME/include:$$CMAKE_INCLUDE_PATH;
       export CMAKE_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$CMAKE_LIBRARY_PATH;
       . etc/bashrc;
       ./Allwmake 
