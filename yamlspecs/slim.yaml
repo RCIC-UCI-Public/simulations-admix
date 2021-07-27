@@ -1,0 +1,39 @@
+!include rcic-package.yaml
+!include rpm.yaml
+---
+- package: SLiM
+  name: slim 
+  versions: !include versions.yaml 
+  version: "{{versions.slim}}"
+  compiler: "{{versions.compiler.name}}"
+  compiler_version: "{{versions.compiler.version}}"
+  extension: zip
+  vendor_source: http://benhaller.com/slim/{{package}}.{{extension}}
+  src_dir: "{{package}}"
+  description: |
+   SLiM {{version}} is an evolutionary simulation framework that combines a powerful
+   engine for population genetic simulations with the capability of modeling
+   arbitrarily complex evolutionary scenarios. See https://messerlab.org/slim
+  build:
+    base_modules: 
+      - "{{compiler}}/{{compiler_version}}"
+    modules: 
+      - foundation
+      - "{{build.base_modules}}"
+    pkgmake: >
+      mkdir builddir;
+      cd builddir;
+      cmake ..;
+      make -j 8;
+      # these are needed so that qt3 default is not used
+      export QTDIR=/usr/lib64/qt5;
+      export QTINC=/usr/include/qt5;
+      export QTLIB=/usr/lib64;
+      cmake -D BUILD_SLIMGUI=ON ..;
+      make -j 8
+  install:
+    makeinstall: >
+      cd builddir; 
+      cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
+  requires:
+    - "{{compiler}}_{{compiler_version}}"

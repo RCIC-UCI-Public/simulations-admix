@@ -9,6 +9,7 @@ system:
   - qt5-qttools-devel
   - qt5-qtxmlpatterns-devel
   - qt5-qtsvg-devel
+  - qt5-qtbase-gui
   - boost-devel
 bootstrap:
   - sqlite3
@@ -32,6 +33,8 @@ build:
   - openfoam-module
   - jags
   - jags-module
+  - slim
+  - slim-module
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"

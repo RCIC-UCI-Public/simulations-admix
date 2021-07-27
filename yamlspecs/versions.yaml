@@ -27,3 +27,4 @@ sqlite3:
   release: "3320300"
 dream3d: "6.5.141"
 jags: "4.3.0"
+slim: "3.6"

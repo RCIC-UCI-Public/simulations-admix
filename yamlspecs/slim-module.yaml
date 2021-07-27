@@ -1,0 +1,11 @@
+!include slim.yaml
+!include rcic-module.yaml
+---
+- package: slim module 
+  category: GENOMICS
+  module:
+    prepend_path:
+      - PATH {{root}}/bin
+    setenv: ""
+    prereq:
+      - "{{build.base_modules}}"
