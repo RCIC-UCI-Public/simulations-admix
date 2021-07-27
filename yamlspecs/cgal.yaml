@@ -9,7 +9,7 @@
   compiler_version: "{{versions.compiler.version}}"
   mpi: "{{versions.mpi.name}}"
   mpi_version: "{{versions.mpi.version}}"
-  vendor_source: wget https://github.com/CGAL/cgal/archive/releases/{{package}}-{{version}}.{{extension}}
+  vendor_source: https://github.com/CGAL/cgal/archive/releases/{{package}}-{{version}}.{{extension}}
   src_dir: "{{name}}-releases-{{package}}-{{version}}"
   description: |
     CGAL {{version}} is a software project that provides easy access to efficient and reliable 
