@@ -7,7 +7,7 @@
   module:
     prepend_path:
       - *Prepend_path
-      - PYTHONPATH {{root}}/{{module.lib}}/python{{versions.python.version_major}}/site-packages
+      - PYTHONPATH {{root}}/{{module.lib}}/python{{python_major}}/site-packages
     setenv:
       - *Setenv
       - PARAVIEW_HOME {{root}}

@@ -3,6 +3,8 @@
 - package: ParaView
   name: paraview 
   version: "{{versions.paraview.version}}"
+  python_version: "{{versions.python3}}"
+  python_major: "{{versions.python3_major}}"
   version_rel: "{{versions.paraview.version_rel}}"
   release: 3
   mpi: "{{versions.mpi.name}}"
@@ -24,8 +26,8 @@
       export CMAKE_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$CMAKE_LIBRARY_PATH;
       cmake {{OPTS1}} {{OPTS2}} --prefix={{root}} ..)
     base_modules: 
-      - python/{{versions.python.version}}
-      - intel-tbb/{{versions.tbb}}
+      - python/{{python_version}}
+      - intel-tbb/{{versions.intel_tbb}}
       - "{{mpi}}/{{mpi_version}}/{{compiler}}.{{compiler_version}}"
       - ffmpeg/{{versions.ffmpeg}}
       - gdal/{{versions.gdal}}
@@ -38,8 +40,8 @@
       cd builddir; 
       cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
   requires:
-    - python_{{versions.python.version}}
-    - intel-tbb_{{versions.tbb}}
+    - python_{{python_version}}
+    - intel-tbb_{{versions.intel_tbb}}
     - "{{mpi}}_{{mpi_version}}_{{compiler}}_{{compiler_version}}"
     - ffmpeg_{{versions.ffmpeg}}
     - gdal_{{versions.gdal}}
