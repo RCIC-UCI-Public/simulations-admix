@@ -6,7 +6,7 @@
   python_version: "{{versions.python3}}"
   python_major: "{{versions.python3_major}}"
   version_rel: "{{versions.paraview.version_rel}}"
-  release: 3
+  #release: 3
   mpi: "{{versions.mpi.name}}"
   mpi_version: "{{versions.mpi.version}}"
   baseurl: https://www.paraview.org/paraview-downloads/download.php?
@@ -24,7 +24,8 @@
       cd builddir;
       export CMAKE_INCLUDE_PATH=$$FFMPEG_INC:$$GDAL_HOME/include:$$CMAKE_INCLUDE_PATH;
       export CMAKE_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$CMAKE_LIBRARY_PATH;
-      cmake {{OPTS1}} {{OPTS2}} --prefix={{root}} ..)
+      cmake {{OPTS1}} {{OPTS2}} ..)
+    configure_args:
     base_modules: 
       - python/{{python_version}}
       - intel-tbb/{{versions.intel_tbb}}

@@ -17,7 +17,8 @@
       cd builddir;
       export CMAKE_INCLUDE_PATH=$$GCC_INSTALL_PREFIX/include:$$CMAKE_INCLUDE_PATH;
       export CMAKE_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$CMAKE_LIBRARY_PATH;
-      cmake -DCGAL_HEADER_ONLY=OFF -DCMAKE_BUILD_TYPE=Release --prefix={{root}} .. )
+      cmake -DCGAL_HEADER_ONLY=OFF -DCMAKE_BUILD_TYPE=Release  .. )
+    configure_args:
     base_modules: 
       - "{{compiler}}/{{compiler_version}}"
     modules: 
