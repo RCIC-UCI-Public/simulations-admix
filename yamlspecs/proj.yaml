@@ -16,10 +16,10 @@
     configure: ./autogen.sh; ./configure
     modules: 
       - "{{compiler}}/{{compiler_version}}"
-      - sqlite3/{{versions.sqlite3.version}}
+      - !ifeq "{{versions.os_release}},7,sqlite3/{{versions.sqlite3.version}},"
     pkgmake: make -j 8
   install:
     makeinstall: make prefix=$(ROOT){{root}} install
   requires:
     - "{{compiler}}_{{compiler_version}}"
-    - sqlite3_{{versions.sqlite3.version}}
+    - !ifeq "{{versions.os_release}},7,sqlite3_{{versions.sqlite3.version}},"

@@ -14,12 +14,14 @@
     formats. It also comes with a variety of useful command line utilities for data translation
     and processing. See https://gdal.org
   build:
+    preconfigure: cd gdal; ./autogen.sh; cd ..
     configure: cd gdal; ./configure --with-proj=$$PROJ_HOME
     modules: 
       - "{{compiler}}/{{compiler_version}}"
       - proj/{{versions.proj}}
-      - sqlite3/{{versions.sqlite3.version}}
-    pkgmake: make -j 8
+      - foundation
+      - !ifeq "{{versions.os_release}},7,sqlite3/{{versions.sqlite3.version}},"
+    pkgmake: unset MAKEFLAGS; make -j 8
   install:
     makeinstall: >
       cd gdal; 
@@ -27,4 +29,4 @@
   requires:
     - "{{compiler}}_{{compiler_version}}"
     - proj_{{versions.proj}}
-    - sqlite3_{{versions.sqlite3.version}}
+    - !ifeq "{{versions.os_release}},7,sqlite3_{{versions.sqlite3.version}},"

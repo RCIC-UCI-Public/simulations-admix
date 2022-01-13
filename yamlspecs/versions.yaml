@@ -3,10 +3,10 @@
 opensees_prev: "3.1.0"
 opensees: "3.3.0"
 proj: "6.3.2"
-gdal: "3.1.0"
+gdal: "3.4.1"
 paraview:
-  version: "5.8.0"
-  version_rel: "5.8"
+  version: "5.10.0"
+  version_rel: "5.10"
 cgal: "5.0.2"
 scotch: "6.0.9"
 openfoam:
@@ -17,3 +17,4 @@ sqlite3:
   release: "3320300"
 dream3d: "6.5.141"
 jags: "4.3.0"
+ffmpeg: "4.1.3"

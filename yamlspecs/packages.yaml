@@ -1,6 +1,8 @@
+site: !include site.yaml
 system:
   - flex
   - bison
+  - jasper-devel
   - libX11-devel
   - libXt-devel
   - mesa-libGL-devel
@@ -10,9 +12,10 @@ system:
   - qt5-qtxmlpatterns-devel
   - qt5-qtsvg-devel
   - boost-devel
+  - !ifeq "{{site.os_release}},8,sqlite-devel,"
 bootstrap:
-  - sqlite3
-  - sqlite3-module
+  - !ifeq "{{site.os_release}},7,sqlite3,"
+  - !ifeq "{{site.os_release}},7,sqlite3-module,"
   - proj
   - proj-module
   - gdal

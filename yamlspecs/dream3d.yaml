@@ -16,5 +16,9 @@
   install:
      makeinstall: >
        $(TAR) cf - * | (cd $(ROOT){{root}}; tar xvf -)    
+
+  rpmBuildIdLinks: none
   rpm:
-    extras: *RpmNone
+    sysextras: *RpmNone
+    extras: >
+       %define _build_id_links {{rpmBuildIdLinks}}\n{{rpm.sysextras}}
