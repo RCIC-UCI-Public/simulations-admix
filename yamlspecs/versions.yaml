@@ -18,3 +18,4 @@ sqlite3:
 dream3d: "6.5.141"
 jags: "4.3.0"
 ffmpeg: "4.1.3"
+aria2: "1.36.0"

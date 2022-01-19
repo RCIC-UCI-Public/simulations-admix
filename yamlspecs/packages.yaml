@@ -35,6 +35,9 @@ build:
   - openfoam-module
   - jags
   - jags-module
+  - aria2
+  - aria2-module
+
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"
