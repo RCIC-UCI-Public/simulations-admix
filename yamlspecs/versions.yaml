@@ -18,3 +18,4 @@ sqlite3:
 dream3d: "6.5.141"
 jags: "4.3.0"
 geos: "3.8.1"
+aria2: "1.36.0"
