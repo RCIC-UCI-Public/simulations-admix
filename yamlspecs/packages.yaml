@@ -12,6 +12,7 @@ system:
   - qt5-qtxmlpatterns-devel
   - qt5-qtsvg-devel
   - boost-devel
+  - tcl-devel
   - !ifeq "{{site.os_release}},8,sqlite-devel,"
 bootstrap:
   - !ifeq "{{site.os_release}},7,sqlite3,"
@@ -20,24 +21,25 @@ bootstrap:
   - proj-module
   - gdal
   - gdal-module
-  - paraview
-  - paraview-module
-  - scotch
-  - scotch-module
-  - cgal
-  - cgal-module
+# - paraview
+# - paraview-module
+# - scotch
+# - scotch-module
+# - cgal
+# - cgal-module
 build:
   - opensees
   - opensees-module
-  - dream3d
-  - dream3d-module
-  - openfoam
-  - openfoam-module
+# - dream3d
+# - dream3d-module
+# - openfoam
+# - openfoam-module
   - jags
   - jags-module
   - aria2
   - aria2-module
-
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"
+sets:
+  - centos8

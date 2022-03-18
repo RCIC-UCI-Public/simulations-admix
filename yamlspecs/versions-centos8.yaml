@@ -1,0 +1,8 @@
+!include versions.yaml
+!include updates8.yaml
+---
+opensees: "3.4.0"
+proj: "9.0.0"
+proj_buildtype: "cmake"
+gdal: "3.4.1"
+geos: "3.10.2"

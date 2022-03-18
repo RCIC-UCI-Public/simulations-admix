@@ -2,6 +2,7 @@
 ---
 opensees: "3.3.0"
 proj: "6.3.2"
+proj_buildtype: "autotools"
 gdal: "3.1.0"
 paraview:
   version: "5.8.0"
