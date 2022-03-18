@@ -6,8 +6,8 @@
   release: 2
   module:
     prepend_path:
+      - *Flagspath
       - *Prepend_path
-      - -d " " CPPFLAGS -I{{root}}/include
-      - -d " " LDFLAGS "-L{{root}}/lib -Wl,-rpath,{{root}}/lib"
     setenv:
+      - *Setenv
       - GDAL_HOME {{root}}
