@@ -4,15 +4,14 @@
   name: aria2 
   versions: !include versions.yaml
   version: "{{versions.aria2}}"
-  vendor_source: https://github.com/{{name}}/{{name}}/release-{{version}}/download/{{name}}-{{version}}.{{extension}}
-
+  vendor_source: https://github.com/{{name}}/{{name}}/releases/download/release-{{version}}/{{name}}-{{version}}.{{extension}}
   description: |
     Aria2 {{version}} is a lightweight multi-protocol & multi-source, cross platform download utility 
-    operated in command-line. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink.
+    operated in command-line. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink
   build:
     configure: ./configure
     modules: 
-      - sqlite3/{{versions.sqlite3.version}} 
+      - !ifeq "{{versions.os_release}},7,sqlite3/{{versions.sqlite3.version}},"
     pkgmake: make -j 8
   requires:
-    - "sqlite3/{{versions.sqlite3.version}}"
+    - !ifeq "{{versions.os_release}},7,sqlite3_{{versions.sqlite3.version}},"
