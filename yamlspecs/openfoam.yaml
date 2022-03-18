@@ -20,7 +20,7 @@
       - paraview/{{versions.paraview.version}}
     modules: 
       - "{{build.base_modules}}"
-      - foundation
+      - foundation/{{versions.foundation}}
     pkgmake: >
       export FFMPEG_INCLUDE_DIRS=$$FFMPEG_INC;
       export FFMPEG_LIBRARIES=$$FFMPEG_LIB;

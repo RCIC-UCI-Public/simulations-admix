@@ -33,7 +33,7 @@
       - ffmpeg/{{versions.ffmpeg}}
       - gdal/{{versions.gdal}}
     modules: 
-      - foundation
+      - foundation/{{versions.foundation}}
       - "{{build.base_modules}}"
     pkgmake: ninja -C builddir
   install:

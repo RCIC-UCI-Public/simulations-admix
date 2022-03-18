@@ -22,7 +22,7 @@
     base_modules: 
       - "{{compiler}}/{{compiler_version}}"
     modules: 
-      - foundation
+      - foundation/{{versions.foundation}}
       - "{{build.base_modules}}"
     pkgmake: make -C builddir -j 8
   install:
