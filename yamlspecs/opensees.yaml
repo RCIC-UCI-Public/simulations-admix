@@ -16,8 +16,9 @@
     pkgmake: >
       export OSBDIR=`pwd`;
       cp MAKES/Makefile.def.EC2-REDHAT-ENTERPRISE Makefile.def;
+      sed -i 's/libtcl8.5/libtcl/' Makefile.def;
       (sed -i 's/$$(HOME)/$$(OSBDIR)/' SRC/system_of_eqn/linearSOE/BJsolvers/Makefile SRC/system_of_eqn/linearSOE/mumps/Makefile SRC/reliability/Makefile SRC/Makefile SRC/optimization/Makefile SRC/java/Makefile);
-      make
+      unset MAKEFLAGS; make -j 8
   extras: README COPY*
   install:
      makeinstall: >
