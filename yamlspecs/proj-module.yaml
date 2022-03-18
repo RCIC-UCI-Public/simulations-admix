@@ -5,9 +5,12 @@
   category: LIBRARIES
   release: 2
   module:
+    lib: !ifeq "{{buildtype}},cmake,lib64,lib"
     prepend_path:
+      - *Flagspath
       - *Prepend_path
-      - -d " " CPPFLAGS -I{{root}}/include
-      - -d " " LDFLAGS "-L{{root}}/lib -Wl,-rpath,{{root}}/lib"
     setenv:
+      - *Setenv
       -  PROJ_HOME {{root}}
+    prereq:
+      - "{{build.base_modules}}"

@@ -1,25 +1,44 @@
 !include common.yaml
 ---
 - package: PROJ
-  name: proj 
+  name: proj
   version: "{{versions.proj}}"
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
   vendor_source: https://github.com/OSGeo/PROJ/archive/{{version}}.{{extension}}
   src_dir: "{{package}}-{{version}}"
   description: |
-    PROJ {{version}} is a generic coordinate transformation software, that transforms 
+    PROJ {{version}} is a generic coordinate transformation software, that transforms
     coordinates from one coordinate reference system (CRS) to another. This includes
     cartographic projections as well as geodetic transformations. Prerequisite for GDAL
     See https://proj.org
+
+  # for autotools build
+  configure_autotools: ./autogen.sh; ./configure
+  pkgmake_autotools: make -j 8
+  makeinstall_autotools: make prefix=$(ROOT){{root}} install
+  # for cmake build
+  configure_cmake: mkdir builddir; cd builddir; cmake ..
+  pkgmake_cmake: cd builddir; make -j 8
+  makeinstall_cmake: cd builddir; cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
+  # actual build depending on source version
+  buildtype: "{{versions.proj_buildtype}}"
   build:
-    configure: ./autogen.sh; ./configure
-    modules: 
+    configure: !ifeq "{{buildtype}},cmake,{{configure_cmake}},{{configure_autotools}}"
+    configure_args:
+    base_modules:
       - "{{compiler}}/{{compiler_version}}"
+    modules:
+      - "{{build.base_modules}}"
+      - foundation/{{versions.foundation}}
       - !ifeq "{{versions.os_release}},7,sqlite3/{{versions.sqlite3.version}},"
-    pkgmake: make -j 8
+    pkgmake: !ifeq "{{buildtype}},cmake,{{pkgmake_cmake}},{{pkgmake_autotools}}"
   install:
-    makeinstall: make prefix=$(ROOT){{root}} install
+    makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"
   requires:
     - "{{compiler}}_{{compiler_version}}"
     - !ifeq "{{versions.os_release}},7,sqlite3_{{versions.sqlite3.version}},"
+
+# NOTE: as of 9.0.0 proj is using cmake for building from source
+# Because of this have to maintain autotools build for old distro version 6.*
+# and cmake build for new version 9.* and later.
