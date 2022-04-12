@@ -4,7 +4,8 @@
   name: sqlite3 
   version: "{{versions.sqlite3.version}}"
   version_rel: "{{versions.sqlite3.release}}"
-  vendor_source: https://www.sqlite.org/2020/sqlite-autoconf-{{version_rel}}.{{extension}}
+  version_year: "{{versions.sqlite3.year}}"
+  vendor_source: https://www.sqlite.org/{{version_year}}/sqlite-autoconf-{{version_rel}}.{{extension}}
   src_dir: sqlite-autoconf-{{version_rel}}
   description: |
     SQLite {{version}} is an in-process library that implements a self-contained, serverless, 

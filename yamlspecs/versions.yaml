@@ -15,6 +15,7 @@ openfoam:
 sqlite3:
   version: "3.32.3"
   release: "3320300"
+  year: "2020"
 dream3d: "6.5.141"
 jags: "4.3.0"
 geos: "3.8.1"
