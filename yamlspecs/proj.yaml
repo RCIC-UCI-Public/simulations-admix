@@ -18,7 +18,7 @@
   pkgmake_autotools: make -j 8
   makeinstall_autotools: make prefix=$(ROOT){{root}} install
   # for cmake build
-  configure_cmake: mkdir builddir; cd builddir; cmake ..
+  configure_cmake: mkdir builddir; cd builddir; cmake -DCMAKE_INSTALL_PREFIX={{root}} ..
   pkgmake_cmake: cd builddir; make -j 8
   makeinstall_cmake: cd builddir; cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
   # actual build depending on source version
@@ -28,16 +28,16 @@
     configure_args:
     base_modules:
       - "{{compiler}}/{{compiler_version}}"
+      - sqlite3/{{versions.sqlite3.version}}
     modules:
       - "{{build.base_modules}}"
       - foundation/{{versions.foundation}}
-      - !ifeq "{{versions.os_release}},7,sqlite3/{{versions.sqlite3.version}},"
     pkgmake: !ifeq "{{buildtype}},cmake,{{pkgmake_cmake}},{{pkgmake_autotools}}"
   install:
     makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"
   requires:
     - "{{compiler}}_{{compiler_version}}"
-    - !ifeq "{{versions.os_release}},7,sqlite3_{{versions.sqlite3.version}},"
+    - sqlite3_{{versions.sqlite3.version}}
 
 # NOTE: as of 9.0.0 proj is using cmake for building from source
 # Because of this have to maintain autotools build for old distro version 6.*
