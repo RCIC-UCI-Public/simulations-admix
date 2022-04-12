@@ -15,8 +15,8 @@ system:
   - tcl-devel
   - !ifeq "{{site.os_release}},8,sqlite-devel,"
 bootstrap:
-  - !ifeq "{{site.os_release}},7,sqlite3,"
-  - !ifeq "{{site.os_release}},7,sqlite3-module,"
+  - sqlite3
+  - sqlite3-module
   - proj
   - proj-module
   - gdal
