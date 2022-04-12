@@ -19,7 +19,7 @@
     modules: 
       - "{{compiler}}/{{compiler_version}}"
       - proj/{{versions.proj}}
-      - !ifeq "{{versions.os_release}},7,sqlite3/{{versions.sqlite3.version}},"
+      - sqlite3/{{versions.sqlite3.version}}
       - geos/{{versions.geos}}
     pkgmake: unset MAKEFLAGS; make -j 8
   install:
@@ -29,4 +29,4 @@
   requires:
     - "{{compiler}}_{{compiler_version}}"
     - proj_{{versions.proj}}
-    - !ifeq "{{versions.os_release}},7,sqlite3_{{versions.sqlite3.version}},"
+    - sqlite3_{{versions.sqlite3.version}}
