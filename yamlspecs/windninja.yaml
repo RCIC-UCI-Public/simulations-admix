@@ -1,0 +1,34 @@
+!include common.yaml
+---
+- package: WindNinja
+  name: windninja 
+  version: "{{versions.windninja}}"
+  vendor_source: https://github.com/firelab/windninja/archive/refs/tags/{{version}}.{{extension}}
+  description: |
+    WindNinja {{version}} is a diagnostic wind model developed for use in wildland fire modeling.
+    See http://firelab.org/project/windninja
+  builddir: builddir
+  build:
+    configure: echo using cmake
+    configure_args:
+    base_modules: 
+      - "{{compiler}}/{{compiler_version}}"
+      - netcdf-c/{{versions.netcdf}}/{{compiler}}.{{compiler_version}}
+      - gdal/{{versions.gdal}}
+    modules: 
+      - foundation/{{versions.foundation}}
+      - "{{build.base_modules}}"
+    cmake_args: -DNETCDF_INCLUDES=$$NETCDF/include -DNETCDF_LIBRARIES=$$NETCDF/lib -DNETCDF_LIBRARIES_C=$$NETCDF/lib -DGDAL_INCLUDE_DIR=$$GDAL_HOME/include -DNINJA_QTGUI=OFF -DNINJA_CLI=ON 
+    pkgmake: >
+      mkdir {{builddir}};
+      cd {{builddir}};
+      export LDFLAGS="$$LDFLAGS -lnetcdf";
+      cmake -DCMAKE_INSTALL_PREFIX={{root}} {{build.cmake_args}} ..;
+      unset MAKEFLAGS;
+      make  -j 8
+  install:
+    makeinstall: >
+      cd {{builddir}};
+      cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
+  requires:
+    - "{{compiler}}_{{compiler_version}}"

@@ -38,6 +38,8 @@ build:
   - jags-module
   - aria2
   - aria2-module
+  - windninja
+  - windninja-module
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"

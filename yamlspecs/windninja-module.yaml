@@ -1,0 +1,8 @@
+!include windninja.yaml
+!include rcic-module.yaml
+---
+- package: windninja module
+  category: LIBRARIES
+  module:
+    prereq:
+      - "{{build.base_modules}}"
