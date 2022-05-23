@@ -15,10 +15,11 @@
       - "{{compiler}}/{{compiler_version}}"
       - netcdf-c/{{versions.netcdf}}/{{compiler}}.{{compiler_version}}
       - gdal/{{versions.gdal}}
+      - boost/{{versions.boost}}/{{compiler}}.{{compiler_version}}
     modules: 
-      - foundation/{{versions.foundation}}
+      - foundation
       - "{{build.base_modules}}"
-    cmake_args: -DNETCDF_INCLUDES=$$NETCDF/include -DNETCDF_LIBRARIES=$$NETCDF/lib -DNETCDF_LIBRARIES_C=$$NETCDF/lib -DGDAL_INCLUDE_DIR=$$GDAL_HOME/include -DNINJA_QTGUI=OFF -DNINJA_CLI=ON 
+    cmake_args: -DNETCDF_INCLUDES=$$NETCDF/include -DNETCDF_LIBRARIES=$$NETCDF/lib -DNETCDF_LIBRARIES_C=$$NETCDF/lib -DGDAL_INCLUDE_DIR=$$GDAL_HOME/include -DBOOST_ROOT=$$BOOST_HOME -DNINJA_QTGUI=OFF -DNINJA_CLI=ON 
     pkgmake: >
       mkdir {{builddir}};
       cd {{builddir}};
