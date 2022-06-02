@@ -4,21 +4,22 @@ opensees: "3.3.0"
 proj: "6.3.2"
 proj_buildtype: "autotools"
 gdal: "3.1.0"
-paraview:
-  version: "5.8.0"
-  version_rel: "5.8"
-cgal: "5.0.2"
-scotch: "6.0.9"
-openfoam:
-  version: "7"
-  release: "20200508"
 sqlite3:
   version: "3.32.3"
   release: "3320300"
   year: "2020"
-dream3d: "6.5.141"
 jags: "4.3.0"
 geos: "3.8.1"
 aria2: "1.36.0"
 windninja: "3.7.3"
 netcdf: "4.7.0"
+# unused
+#paraview:
+#  version: "5.8.0"
+#  version_rel: "5.8"
+#cgal: "5.0.2"
+#scotch: "6.0.9"
+#openfoam:
+#  version: "7"
+#  release: "20200508"
+#dream3d: "6.5.141"
