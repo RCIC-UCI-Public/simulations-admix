@@ -1,4 +1,3 @@
-330f0931c5419b3bda0aaf370f99ef1affc23f7f  sources/opensees-3.1.0.tar.gz 15Ij53dDsqjP7b1QVzzipj4pNHnLpniv9
 e66dd19cec37cc221b293d92f995e5ff1abf141f  sources/gdal-3.1.0.tar.gz 1Krej0AakBYvevpJZNWBiGXzIcvgdPcJF
 7eb6c97fefaf7e71362fddb540780369fb818923  sources/paraview-5.8.0.tar.gz 14x82HyUx2nbF7fgxTHHAK6fNE8gCNxrL
 cc64886d59edac5071cb5c5b21d5e928fb767275  sources/proj-6.3.2.tar.gz 1ya0V4CV3aadiODUyUYtMuqKv2Tw9Cd29
@@ -9,4 +8,10 @@ ea14ef2dc4cc7fcbc5ebbb018d3a03faa3a41cb4  sources/sqlite3-3.32.3.tar.gz 1G9bcCEE
 947d6ee384f4ccbd27b535eaa5588dd01be796fc  sources/jags-4.3.0.tar.gz 1k6G9OfQH4a71Iy4ccjnDy0Ax2m4Zrbe4
 dd23b5989ca81673080b776753358575408c6eab  sources/opensees-3.3.0.tar.gz 1sAtv9yBtAoPF546C5E5eQW6jXSuOfaQy
 1ee4c3345eb483dc5287b9d9c2e249335a38d510  sources/cgal-5.0.2.tar.gz 1ASmaNk1QOUV2nwREjfmuOgMUQMWjhFwd
-c8a92c28599a469f5ac60bc6e0618760b7e63950  sources/slim-3.6.zip 1M2-SfIKWbMkw3aGmLMH7-gVl3oYY0QVY
+de3822452d6bcbed89cf16679182bd3a74f2cd38  sources/gdal-3.4.1.tar.gz 16O5ovv4LBjzRm_63YMv8qp5caPTJmzYA
+8f173840c3b665e6f5d2c7f9bc048439052625fd  sources/paraview-5.10.0.tar.gz 1ep7CwI9FDwtR_KiOJNKIT_wevxhvmOrN
+4443f6782db380b71124f2589f15814c4086bd71  sources/aria2-1.36.0.tar.gz 10DCqOvdQAYa2Pph7eOmL6t3fnVDsvSEu
+c48bfa632a8789f2c351a71a3e829e152a603a4b  sources/opensees-3.4.0.tar.gz 1NAhEQt2l0ORPTW3-YND5bN6P3MlOP27f
+149038e92cbc7110533c007027d24343a6e5f3d2  sources/proj-9.0.0.tar.gz 1r4TsQg76gZlaZ4PaRhrnDe-aILxwFkaO
+421109d748d729d3e5a2c67056bc703ae6c91e3f  sources/sqlite3-3.38.2.tar.gz 1x4XkJYpDCp00NnQ6rN77g2xWyUjDOBNb
+144e8134a8ce67159cdc968fab2f4c1f237faf4c  sources/windninja-3.7.3.tar.gz 1tQLjKrAODJxwoZgDg-6RjXXrLtE82NpW

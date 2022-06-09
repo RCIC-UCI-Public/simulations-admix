@@ -1,4 +1,3 @@
-# Builds the module for paraview
 !include paraview.yaml
 !include rcic-module.yaml
 ---
@@ -8,16 +7,9 @@
   module:
     prepend_path:
       - *Prepend_path
-      - PYTHONPATH {{root}}/{{module.lib}}/python{{versions.python.version_major}}/site-packages
+      - PYTHONPATH {{root}}/{{module.lib}}/python{{python_major}}/site-packages
     setenv:
       - *Setenv
       - PARAVIEW_HOME {{root}}
     prereq:
-      - *ModuleCompilerMpi_prereq
-      - python/{{versions.python.version}}
-      - intel-tbb/{{versions.tbb}}
-      - ffmpeg/{{versions.ffmpeg}}
-      - gdal/{{versions.gdal}}
-    requires:
-      - *ModuleCompilerMpi_requires
-      - "{{module.prereq}}"
+      - "{{build.base_modules}}"

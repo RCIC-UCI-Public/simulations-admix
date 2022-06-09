@@ -1,16 +1,11 @@
-!include rcic-package.yaml
-!include rpm.yaml
+!include common.yaml
 ---
 - package: gdal
   name: gdal 
-  versions: !include versions.yaml 
   version: "{{versions.gdal}}"
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
-  mpi: "{{versions.mpi.name}}"
-  mpi_version: "{{versions.mpi.version}}"
   vendor_source: https://github.com/OSGeo/gdal/archive/v{{version}}.{{extension}}
-#  src_dir: "{{name}}_{{version}}"
   description: |
     GDAL - Geospatial Data Abstraction Library {{version}} is a translator library for raster and
     vector geospatial data formats that is released under an X/MIT style Open Source License by
@@ -19,13 +14,14 @@
     formats. It also comes with a variety of useful command line utilities for data translation
     and processing. See https://gdal.org
   build:
-    configure: cd gdal; ./configure --with-proj=$$PROJ_HOME
+    preconfigure: cd gdal; ./autogen.sh; cd ..
+    configure: cd gdal; unset CPPFLAGS; ./configure --with-proj=$$PROJ_HOME --with-geos=yes
     modules: 
       - "{{compiler}}/{{compiler_version}}"
       - proj/{{versions.proj}}
       - sqlite3/{{versions.sqlite3.version}}
-    target: 
-    pkgmake: make -j 8
+      - geos/{{versions.geos}}
+    pkgmake: unset MAKEFLAGS; unset CPPFLAGS; make -j 8
   install:
     makeinstall: >
       cd gdal; 

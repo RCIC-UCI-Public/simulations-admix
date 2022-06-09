@@ -1,9 +1,7 @@
-!include rcic-package.yaml
-!include rpm.yaml
+!include common.yaml
 ---
 - package: dream3d 
   name: dream3d 
-  versions: !include versions.yaml 
   version: "{{versions.dream3d}}"
   vendor_source: http://dream3d.bluequartz.net/?page_id=525 
   description: |
@@ -14,11 +12,13 @@
   src_dir:  DREAM3D-{{version}}-Linux-x86_64
   src_tarball: "{{src_dir}}.{{extension}}"
   build:
-    configure: no configure required. Binary release
-    target: 
-    pkgmake: echo prebuilt binary 
+    modules:
   install:
      makeinstall: >
        $(TAR) cf - * | (cd $(ROOT){{root}}; tar xvf -)    
+
+  rpmBuildIdLinks: none
   rpm:
-    extras: *RpmNone
+    sysextras: *RpmNone
+    extras: >
+       %define _build_id_links {{rpmBuildIdLinks}}\n{{rpm.sysextras}}

@@ -1,4 +1,4 @@
-!include jags.yaml
+!include aria2.yaml
 !include rcic-module.yaml
 ---
 - category: STATISTICS

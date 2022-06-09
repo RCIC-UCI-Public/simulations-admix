@@ -1,20 +1,16 @@
-# builds the module for proj
 !include proj.yaml
 !include rcic-module.yaml
 ---
-- package: proj Module
+- package: proj module
   category: LIBRARIES
   release: 2
   module:
+    lib: !ifeq "{{buildtype}},cmake,lib64,lib"
     prepend_path:
+      - *Flagspath
       - *Prepend_path
-      - -d " " CPPFLAGS -I{{root}}/include
-      - -d " " LDFLAGS "-L{{root}}/lib -Wl,-rpath,{{root}}/lib"
     setenv:
+      - *Setenv
       -  PROJ_HOME {{root}}
-    prereq: 
-      - *ModuleCompiler_prereq
-      - sqlite3/{{versions.sqlite3.version}}
-    requires: 
-      - *ModuleCompiler_requires
-      - "{{module.prereq}}"
+    prereq:
+      - "{{build.base_modules}}"

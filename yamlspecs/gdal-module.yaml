@@ -1,21 +1,13 @@
-# builds the module for gdal
 !include gdal.yaml
 !include rcic-module.yaml
 ---
-- package: gdal Module
+- package: gdal module
   category: LIBRARIES
   release: 2
   module:
     prepend_path:
+      - *Flagspath
       - *Prepend_path
-      - -d " " CPPFLAGS -I{{root}}/include
-      - -d " " LDFLAGS "-L{{root}}/lib -Wl,-rpath,{{root}}/lib"
     setenv:
+      - *Setenv
       - GDAL_HOME {{root}}
-    prereq: 
-      - *ModuleCompiler_prereq
-      - sqlite3/{{versions.sqlite3.version}}
-      - proj/{{versions.proj}}
-    requires: 
-      - *ModuleCompiler_requires
-      - "{{module.prereq}}" 

@@ -1,8 +1,7 @@
-# builds the module for openfoam
 !include openfoam.yaml
 !include rcic-module.yaml
 ---
-- package: openfoam Module
+- package: openfoam module
   packagename: OpenFoam
   category: PHYSICS
   wmProjectVersion: "{{version}}-{{version_rel}}"
@@ -44,14 +43,7 @@
       - ParaView_INCLUDE_DIR {{paraviewDir}}/include/paraview-{{versions.paraview.version_rel}}
       - PV_PLUGIN_PATH {{paraviewDir}}/lib64/paraview-{{versions.paraview.version_rel}}
     prereq: 
-      - *ModuleCompiler_prereq
-      - scotch/{{versions.scotch}}
-      - cgal/{{versions.cgal}}
-      - paraview/{{versions.paraview.version}}
-    requires: 
-      - *Requires
-      - "{{module.prereq}}"
-
+      - "{{build.base_modules}}"
 # Keep below for a reference 
 #      - WM_COMPILER Gcc
 #      - WM_ARCH_OPTION 64

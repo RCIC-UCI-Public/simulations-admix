@@ -1,6 +1,8 @@
+site: !include site.yaml
 system:
   - flex
   - bison
+  - jasper-devel
   - libX11-devel
   - libXt-devel
   - mesa-libGL-devel
@@ -11,6 +13,8 @@ system:
   - qt5-qtsvg-devel
   - qt5-qtbase-gui
   - boost-devel
+  - tcl-devel
+  - !ifeq "{{site.os_release}},8,sqlite-devel,"
 bootstrap:
   - sqlite3
   - sqlite3-module
@@ -18,23 +22,27 @@ bootstrap:
   - proj-module
   - gdal
   - gdal-module
-  - paraview
-  - paraview-module
-  - scotch
-  - scotch-module
-  - cgal
-  - cgal-module
+# - paraview
+# - paraview-module
+# - scotch
+# - scotch-module
+# - cgal
+# - cgal-module
 build:
   - opensees
   - opensees-module
-  - dream3d
-  - dream3d-module
-  - openfoam
-  - openfoam-module
+# - dream3d
+# - dream3d-module
+# - openfoam
+# - openfoam-module
   - jags
   - jags-module
-  - slim
-  - slim-module
+  - aria2
+  - aria2-module
+  - windninja
+  - windninja-module
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"
+sets:
+  - centos8
