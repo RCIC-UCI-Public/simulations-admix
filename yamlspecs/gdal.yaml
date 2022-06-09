@@ -15,13 +15,13 @@
     and processing. See https://gdal.org
   build:
     preconfigure: cd gdal; ./autogen.sh; cd ..
-    configure: cd gdal; ./configure --with-proj=$$PROJ_HOME --with-geos=yes
+    configure: cd gdal; unset CPPFLAGS; ./configure --with-proj=$$PROJ_HOME --with-geos=yes
     modules: 
       - "{{compiler}}/{{compiler_version}}"
       - proj/{{versions.proj}}
       - sqlite3/{{versions.sqlite3.version}}
       - geos/{{versions.geos}}
-    pkgmake: unset MAKEFLAGS; make -j 8
+    pkgmake: unset MAKEFLAGS; unset CPPFLAGS; make -j 8
   install:
     makeinstall: >
       cd gdal; 
