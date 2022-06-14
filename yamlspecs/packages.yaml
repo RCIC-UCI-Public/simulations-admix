@@ -22,19 +22,9 @@ bootstrap:
   - proj-module
   - gdal
   - gdal-module
-# - paraview
-# - paraview-module
-# - scotch
-# - scotch-module
-# - cgal
-# - cgal-module
 build:
   - opensees
   - opensees-module
-# - dream3d
-# - dream3d-module
-# - openfoam
-# - openfoam-module
   - jags
   - jags-module
   - aria2
@@ -46,3 +36,15 @@ manifest:
   - "{{build}}"
 sets:
   - centos8
+# unused bootstrap
+# - paraview
+# - paraview-module
+# - scotch
+# - scotch-module
+# - cgal
+# - cgal-module
+# unused build
+# - dream3d
+# - dream3d-module
+# - openfoam
+# - openfoam-module
