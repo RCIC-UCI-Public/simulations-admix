@@ -29,8 +29,6 @@ build:
   - jags-module
   - aria2
   - aria2-module
-  - windninja
-  - windninja-module
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"
@@ -48,3 +46,5 @@ sets:
 # - dream3d-module
 # - openfoam
 # - openfoam-module
+# - windninja (requested and unused)
+# - windninja-module
