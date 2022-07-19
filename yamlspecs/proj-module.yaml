@@ -12,5 +12,6 @@
     setenv:
       - *Setenv
       -  PROJ_HOME {{root}}
+      -  PROJ_LIB {{root}}/share/proj
     prereq:
       - "{{build.base_modules}}"

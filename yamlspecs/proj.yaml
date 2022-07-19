@@ -14,7 +14,7 @@
     See https://proj.org
 
   # for autotools build
-  configure_autotools: ./autogen.sh; ./configure
+  configure_autotools: ./autogen.sh; ./configure --prefix={{root}}
   pkgmake_autotools: make -j 8
   makeinstall_autotools: make prefix=$(ROOT){{root}} install
   # for cmake build
