@@ -4,9 +4,12 @@
 opensees: "3.4.0"
 proj: "9.0.0"
 proj_buildtype: "cmake"
+proj_module_rel: "2"
 gdal: "3.4.1"
+gdal_module_rel: "2"
 geos: "3.10.2"
 sqlite3:
   version: "3.38.2"
   release: "3380200"
   year: "2022"
+sqlite3_module_rel: "2"
