@@ -1,0 +1,15 @@
+!include versions.yaml
+!include updates8.yaml
+---
+proj: "9.1.1"
+proj_buildtype: "cmake"
+proj_module_rel: "1"
+gdal: "3.6.2"
+gdal_module_rel: "1"
+geos: "3.11.1"
+gdal_buildtype: "cmake"
+sqlite3:
+  version: "3.41.0"
+  release: "3410000"
+  year: "2023"
+sqlite3_module_rel: "1"

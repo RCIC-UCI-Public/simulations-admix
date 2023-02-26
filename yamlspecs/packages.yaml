@@ -34,6 +34,7 @@ manifest:
   - "{{build}}"
 sets:
   - centos8
+  - "2023"
 # unused bootstrap
 # - paraview
 # - paraview-module
