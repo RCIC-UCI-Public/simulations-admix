@@ -3,8 +3,9 @@
 ---
 - package: gdal module
   category: LIBRARIES
-  release: 2
+  release: "{{versions.gdal_module_rel}}"
   module:
+    lib: !ifeq "{{buildtype}},cmake,lib64,lib"
     prepend_path:
       - *Flagspath
       - *Prepend_path

@@ -13,20 +13,37 @@
     data model and single vector abstract data model to the calling application for all supported
     formats. It also comes with a variety of useful command line utilities for data translation
     and processing. See https://gdal.org
+
+  # for autotools build
+  configure_autotools: cd gdal; ./autogen.sh; UNSET CPPFLAGS; ./configure --with-proj=$$PROJ_HOME --with-geos=yes
+  pkgmake_autotools: unset MAKEFLAGS; unset CPPFLAGS; make -j 8
+  makeinstall_autotools: cd gdal; make prefix=$(ROOT){{root}} install
+
+  # for cmake build
+  configure_cmake: mkdir builddir; cd builddir; cmake -DCMAKE_INSTALL_PREFIX={{root}} ..
+  pkgmake_cmake: cd builddir; make -j 8
+  makeinstall_cmake: cd builddir; cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
+
+  # actual build depending on source version
+  buildtype: "{{versions.gdal_buildtype}}"
+
   build:
-    preconfigure: cd gdal; ./autogen.sh; cd ..
-    configure: cd gdal; unset CPPFLAGS; ./configure --with-proj=$$PROJ_HOME --with-geos=yes
+    configure: !ifeq "{{buildtype}},cmake,{{configure_cmake}},{{configure_autotools}}"
+    configure_args:
     modules: 
       - "{{compiler}}/{{compiler_version}}"
       - proj/{{versions.proj}}
       - sqlite3/{{versions.sqlite3.version}}
       - geos/{{versions.geos}}
-    pkgmake: unset MAKEFLAGS; unset CPPFLAGS; make -j 8
+    pkgmake: !ifeq "{{buildtype}},cmake,{{pkgmake_cmake}},{{pkgmake_autotools}}"
   install:
-    makeinstall: >
-      cd gdal; 
-      make prefix=$(ROOT){{root}} install
+    makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"
   requires:
     - "{{compiler}}_{{compiler_version}}"
     - proj_{{versions.proj}}
     - sqlite3_{{versions.sqlite3.version}}
+
+####
+# NOTE: as of 3.6.2 gdal is using cmake for building from source
+# Because of this have to maintain autotools build for old distro version 6.*
+# and cmake build for new version 9.* and later.
