@@ -3,7 +3,7 @@
 ---
 - package: proj module
   category: LIBRARIES
-  release: 2
+  release: "{{versions.proj_module_rel}}"
   module:
     lib: !ifeq "{{buildtype}},cmake,lib64,lib"
     prepend_path:

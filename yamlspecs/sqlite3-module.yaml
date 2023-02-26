@@ -3,7 +3,7 @@
 ---
 - package: sqlite3 module
   category: LIBRARIES
-  release: 2
+  release: "{{versions.sqlite3_module_rel}}"
   module:
     prepend_path:
       - *Prepend_path
