@@ -2,6 +2,7 @@
 ---
 - package: PROJ
   name: proj
+  release: 2
   version: "{{versions.proj}}"
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
@@ -18,7 +19,7 @@
   pkgmake_autotools: make -j 8
   makeinstall_autotools: make prefix=$(ROOT){{root}} install
   # for cmake build
-  configure_cmake: mkdir builddir; cd builddir; cmake -DCMAKE_INSTALL_PREFIX={{root}} ..
+  configure_cmake: sed -i "s/PROJ_DATA_PATH}/CMAKE_INSTALL_DATADIR}\/proj/" data/CMakeLists.txt; mkdir builddir; cd builddir; cmake -DCMAKE_INSTALL_PREFIX={{root}} -DCMAKE_BUILD_TYPE=Release ..
   pkgmake_cmake: cd builddir; make -j 8
   makeinstall_cmake: cd builddir; cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
   # actual build depending on source version
@@ -42,3 +43,8 @@
 # NOTE: as of 9.0.0 proj is using cmake for building from source
 # Because of this have to maintain autotools build for old distro version 6.*
 # and cmake build for new version 9.* and later.
+#
+# NOTE: data/CMakeLists.rxt has a DESTINATION variable set that does not allow
+# for using a different prefix. The sed command before cmake takes care of
+# properly setting a variable so that a resulting cmake_install.cmake file uses 
+# a variable for the installation and not a hard coded path. 
