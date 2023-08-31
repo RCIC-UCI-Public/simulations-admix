@@ -19,6 +19,4 @@
 
   rpmBuildIdLinks: none
   rpm:
-    sysextras: *RpmNone
-    extras: >
-       %define _build_id_links {{rpmBuildIdLinks}}\n{{rpm.sysextras}}
+    extras: *RpmNone
