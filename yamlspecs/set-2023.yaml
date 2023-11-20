@@ -2,3 +2,7 @@
 ---
 versions: versions-2023.yaml
 build:
+  - petsc
+  - petsc-module
+  - petsc-cuda
+  - petsc-cuda-module

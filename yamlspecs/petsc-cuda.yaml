@@ -1,0 +1,12 @@
+!include petsc.yaml
+---
+- package: petsc-cuda
+  cuda: cuda
+  cuda_version: "{{versions.cuda.version}}"
+  basefamily: "{{name}}_{{version}}"
+  baserpm: "{{basefamily}}_{{cuda}}_{{cuda_version}}"
+  root: "{{pkg_defaults.app_path}}/{{name}}/{{version}}/{{cuda}}/{{cuda_version}}"
+  build:
+    configure: unset MAKEFLAGS; ./configure --with-cuda --prefix={{root}}
+    addmodules:
+      - cuda/{{cuda_version}}

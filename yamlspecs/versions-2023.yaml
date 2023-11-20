@@ -13,3 +13,4 @@ sqlite3:
   release: "3410000"
   year: "2023"
 sqlite3_module_rel: "1"
+petsc: "3.20.1"
