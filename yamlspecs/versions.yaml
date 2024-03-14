@@ -12,18 +12,5 @@ sqlite3:
   release: "3320300"
   year: "2020"
 sqlite3_module_rel: "2"
-jags: "4.3.0"
 geos: "3.8.1"
-aria2: "1.36.0"
 netcdf: "4.7.0"
-# unused
-#paraview:
-#  version: "5.8.0"
-#  version_rel: "5.8"
-#cgal: "5.0.2"
-#scotch: "6.0.9"
-#openfoam:
-#  version: "7"
-#  release: "20200508"
-#dream3d: "6.5.141"
-#windninja: "3.7.3"

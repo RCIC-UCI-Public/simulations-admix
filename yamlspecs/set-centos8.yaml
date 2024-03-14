@@ -2,5 +2,3 @@
 ---
 versions: versions-centos8.yaml
 build:
-  - opensees
-  - opensees-module

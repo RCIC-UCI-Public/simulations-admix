@@ -1,7 +1,6 @@
 !include versions.yaml
 !include updates8.yaml
 ---
-opensees: "3.4.0"
 proj: "9.0.0"
 proj_buildtype: "cmake"
 proj_module_rel: "2"
