@@ -32,7 +32,7 @@
       - sqlite3/{{versions.sqlite3.version}}
     modules:
       - "{{build.base_modules}}"
-      - foundation/{{versions.foundation}}
+      - cmake/{{versions.cmake}}
     pkgmake: !ifeq "{{buildtype}},cmake,{{pkgmake_cmake}},{{pkgmake_autotools}}"
   install:
     makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"
