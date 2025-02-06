@@ -1,5 +1,6 @@
 !include site.yaml
 ---
+admix: simulations-admix
 opensees: "3.3.0"
 proj: "6.3.2"
 proj_buildtype: "autotools"
