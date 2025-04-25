@@ -14,7 +14,7 @@ system:
   - qt5-qtbase-gui
   - boost-devel
   - tcl-devel
-  - !ifeq "{{site.os_release}},8,sqlite-devel,"
+  - !eval "'sqlite-devel' if {{site.os_release}} >= 8 else ''"
 bootstrap:
   - sqlite3
   - sqlite3-module
