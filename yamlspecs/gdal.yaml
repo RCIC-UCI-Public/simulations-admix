@@ -15,7 +15,7 @@
     and processing. See https://gdal.org
 
   # for autotools build
-  configure_autotools: cd gdal; ./autogen.sh; unset CPPFLAGS; ./configure --with-proj=$$PROJ_HOME --with-geos=yes --prefix={{root}}
+  configure_autotools: cd gdal; ./autogen.sh; unset CPPFLAGS; export CXXFLAGS=-fpermissive; ./configure --with-proj=$$PROJ_HOME --with-geos=yes --prefix={{root}}
   pkgmake_autotools: unset MAKEFLAGS; unset CPPFLAGS; make -j 8
   makeinstall_autotools: cd gdal; make prefix=$(ROOT){{root}} install
 
