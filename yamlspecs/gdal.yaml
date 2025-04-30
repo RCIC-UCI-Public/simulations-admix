@@ -5,6 +5,7 @@
   version: "{{versions.gdal}}"
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
+  baserpm: "{{name}}_{{version}}_{{compiler}}_{{compiler_version}}"
   vendor_source: https://github.com/OSGeo/gdal/archive/v{{version}}.{{extension}}
   description: |
     GDAL - Geospatial Data Abstraction Library {{version}} is a translator library for raster and
@@ -32,16 +33,16 @@
     configure_args:
     modules: 
       - "{{compiler}}/{{compiler_version}}"
-      - proj/{{versions.proj}}
-      - sqlite3/{{versions.sqlite3.version}}
-      - geos/{{versions.geos}}
+      - proj/{{versions.proj}}/{{compiler}}.{{compiler_version}}
+      - sqlite3/{{versions.sqlite3.version}}/{{compiler}}.{{compiler_version}}
+      - geos/{{versions.geos}}/{{compiler}}.{{compiler_version}}
     pkgmake: !ifeq "{{buildtype}},cmake,{{pkgmake_cmake}},{{pkgmake_autotools}}"
   install:
     makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"
   requires:
     - "{{compiler}}_{{compiler_version}}"
-    - proj_{{versions.proj}}
-    - sqlite3_{{versions.sqlite3.version}}
+    - proj_{{versions.proj}}_{{compiler}}_{{compiler_version}}
+    - sqlite3_{{versions.sqlite3.version}}_{{compiler}}_{{compiler_version}}
 
 ####
 # NOTE: as of 3.6.2 gdal is using cmake for building from source

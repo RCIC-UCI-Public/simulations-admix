@@ -5,6 +5,7 @@
   category: LIBRARIES
   release: "{{versions.sqlite3_module_rel}}"
   module:
+    <<: *ModuleCompiler
     prepend_path:
       - *Prepend_path
       - -d " " CPPFLAGS -I{{root}}/include

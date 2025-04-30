@@ -6,6 +6,7 @@
   version: "{{versions.proj}}"
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
+  baserpm: "{{name}}_{{version}}_{{compiler}}_{{compiler_version}}"
   vendor_source: https://github.com/OSGeo/PROJ/archive/{{version}}.{{extension}}
   src_dir: "{{package}}-{{version}}"
   description: |
@@ -29,7 +30,7 @@
     configure_args:
     base_modules:
       - "{{compiler}}/{{compiler_version}}"
-      - sqlite3/{{versions.sqlite3.version}}
+      - sqlite3/{{versions.sqlite3.version}}/{{compiler}}.{{compiler_version}}
     modules:
       - "{{build.base_modules}}"
       - cmake/{{versions.cmake}}
@@ -38,7 +39,7 @@
     makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"
   requires:
     - "{{compiler}}_{{compiler_version}}"
-    - sqlite3_{{versions.sqlite3.version}}
+    - sqlite3_{{versions.sqlite3.version}}_{{compiler}}_{{compiler_version}}
 
 # NOTE: as of 9.0.0 proj is using cmake for building from source
 # Because of this have to maintain autotools build for old distro version 6.*

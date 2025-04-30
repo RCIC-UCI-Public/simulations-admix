@@ -5,6 +5,7 @@
   version: "{{versions.sqlite3.version}}"
   version_rel: "{{versions.sqlite3.release}}"
   version_year: "{{versions.sqlite3.year}}"
+  baserpm: "{{name}}_{{version}}_{{compiler}}_{{compiler_version}}"
   vendor_source: https://www.sqlite.org/{{version_year}}/sqlite-autoconf-{{version_rel}}.{{extension}}
   src_dir: sqlite-autoconf-{{version_rel}}
   description: |
@@ -15,5 +16,7 @@
   build:
     configure: ./configure
     pkgmake: make
+    modules: 
+      - "{{compiler}}/{{compiler_version}}"
   install:
     makeinstall: make prefix=$(ROOT){{root}} install

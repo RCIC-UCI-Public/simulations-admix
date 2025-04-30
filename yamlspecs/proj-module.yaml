@@ -5,6 +5,7 @@
   category: LIBRARIES
   release: "{{versions.proj_module_rel}}"
   module:
+    <<: *ModuleCompiler
     lib: !ifeq "{{buildtype}},cmake,lib64,lib"
     prepend_path:
       - *Flagspath
