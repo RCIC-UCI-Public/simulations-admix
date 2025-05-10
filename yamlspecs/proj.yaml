@@ -2,6 +2,7 @@
 ---
 - package: PROJ
   name: proj
+  root: "{{parent}}/{{version}}/{{compiler}}.{{compiler_version}}"
   release: 2
   version: "{{versions.proj}}"
   compiler: "{{versions.compiler.name}}"

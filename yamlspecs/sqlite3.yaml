@@ -2,6 +2,7 @@
 ---
 - package: sqlite3
   name: sqlite3 
+  root: "{{parent}}/{{version}}/{{compiler}}.{{compiler_version}}"
   version: "{{versions.sqlite3.version}}"
   version_rel: "{{versions.sqlite3.release}}"
   version_year: "{{versions.sqlite3.year}}"
