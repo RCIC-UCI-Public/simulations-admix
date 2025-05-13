@@ -2,6 +2,7 @@
 ---
 - package: gdal
   name: gdal 
+  root: "{{parent}}/{{version}}/{{compiler}}.{{compiler_version}}"
   version: "{{versions.gdal}}"
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
