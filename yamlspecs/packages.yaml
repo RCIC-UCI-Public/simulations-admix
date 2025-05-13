@@ -20,6 +20,8 @@ build:
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"
+
+parallel: 3
 sets:
   - base
   - "2022"
