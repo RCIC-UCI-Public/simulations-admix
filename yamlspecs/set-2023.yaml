@@ -1,4 +1,4 @@
-!include packages.yaml
+!include set-base.yaml
 ---
 versions: versions-2023.yaml
 build:

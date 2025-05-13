@@ -1,0 +1,13 @@
+!include packages.yaml
+---
+versions: versions.yaml
+bootstrap:
+  - sqlite3
+  - sqlite3-module
+  - proj
+  - proj-module
+  - gdal
+  - gdal-module
+build:
+  - opensees
+  - opensees-module
