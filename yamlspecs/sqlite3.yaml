@@ -1,7 +1,7 @@
 !include common.yaml
 ---
 - package: sqlite3
-  name: sqlite3 
+  name: sqlite3
   root: "{{parent}}/{{version}}/{{compiler}}.{{compiler_version}}"
   version: "{{versions.sqlite3.version}}"
   version_rel: "{{versions.sqlite3.release}}"
@@ -10,14 +10,12 @@
   vendor_source: https://www.sqlite.org/{{version_year}}/sqlite-autoconf-{{version_rel}}.{{extension}}
   src_dir: sqlite-autoconf-{{version_rel}}
   description: |
-    SQLite {{version}} is an in-process library that implements a self-contained, serverless, 
-    zero-configuration, transactional SQL database engine. The code for SQLite is in
-    the public domain and is thus free for use for any purpose, commercial or private.
+    SQLite3 is a library that implements a transactional SQL database engine.
     See https://www.sqlite.org
   build:
     configure: ./configure
     pkgmake: make
-    modules: 
+    modules:
       - "{{compiler}}/{{compiler_version}}"
   install:
     makeinstall: make prefix=$(ROOT){{root}} install

@@ -1,14 +1,14 @@
 !include common.yaml
 ---
 - package: PETSc
-  name: petsc 
+  name: petsc
   basefamily: "{{name}}_{{version}}_{{compiler}}_{{compiler_version}}"
   baserpm: "{{basefamily}}"
   root: "{{pkg_defaults.app_path}}/{{name}}/{{version}}/{{compiler}}/{{compiler_version}}"
   version: "{{versions.petsc}}"
   vendor_source: https://web.cels.anl.gov/projects/petsc/download/release-snapshots/{{name}}-{{version}}.{{extension}}
   description: |
-    PETSc, the Portable, Extensible Toolkit for Scientific Computation, version {{version}} is for
+    PETSc (the Portable, Extensible Toolkit for Scientific Computation). It is for
     the scalable (parallel) solution of scientific applications modeled by partial differential
     equations. It has bindings for C, Fortran, and Python (via petsc4py). PETSc also contains TAO,
     the Toolkit for Advanced Optimization, software library. It supports MPI, and GPUs through CUDA,
@@ -20,7 +20,7 @@
     configure: unset MAKEFLAGS; ./configure --prefix={{root}}
     configure_args:
     addmodules:
-    modules: 
+    modules:
       - "{{mpi}}/{{mpi_version}}/{{compiler}}.{{compiler_version}}"
       - "{{build.addmodules}}"
     pkgmake: unset MAKEFLAGS; make -j 8

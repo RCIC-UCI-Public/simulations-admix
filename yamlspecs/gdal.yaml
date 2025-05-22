@@ -1,7 +1,7 @@
 !include common.yaml
 ---
 - package: gdal
-  name: gdal 
+  name: gdal
   root: "{{parent}}/{{version}}/{{compiler}}.{{compiler_version}}"
   version: "{{versions.gdal}}"
   compiler: "{{versions.compiler.name}}"
@@ -9,7 +9,7 @@
   baserpm: "{{name}}_{{version}}_{{compiler}}_{{compiler_version}}"
   vendor_source: https://github.com/OSGeo/gdal/archive/v{{version}}.{{extension}}
   description: |
-    GDAL - Geospatial Data Abstraction Library {{version}} is a translator library for raster and
+    GDAL - Geospatial Data Abstraction Library. It is a translator library for raster and
     vector geospatial data formats that is released under an X/MIT style Open Source License by
     the Open Source Geospatial Foundation.  As a library, it presents a single raster abstract
     data model and single vector abstract data model to the calling application for all supported
@@ -32,7 +32,7 @@
   build:
     configure: !ifeq "{{buildtype}},cmake,{{configure_cmake}},{{configure_autotools}}"
     configure_args:
-    modules: 
+    modules:
       - "{{compiler}}/{{compiler_version}}"
       - proj/{{versions.proj}}/{{compiler}}.{{compiler_version}}
       - sqlite3/{{versions.sqlite3.version}}/{{compiler}}.{{compiler_version}}

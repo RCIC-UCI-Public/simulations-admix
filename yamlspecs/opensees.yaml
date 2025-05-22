@@ -1,15 +1,15 @@
 !include common.yaml
 ---
 - package: OpenSees
-  name: opensees 
+  name: opensees
   version: "{{versions.opensees}}"
   vendor_source: https://github.com/OpenSees/OpenSees/archive/v{{version}}.{{extension}}
-  addfile: 
+  addfile:
     - "filter-requires-{{name}}.sh"
   description: |
-    The Open System for Earthquake Engineering Simulation (OpenSees) is a software framework 
-    for simulating the dynamic response of structural and geotechnical systems 
-    See https://opensees.github.io/OpenSeesDocumentation/
+    OpenSees - the Open System for Earthquake Engineering Simulation.
+    It is a software framework for simulating the dynamic response of
+    structural and geotechnical systems.
   src_dir: OpenSees-{{version}}
   build:
     patchfile: opensees.patch
