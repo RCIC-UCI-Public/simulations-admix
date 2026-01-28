@@ -1,0 +1,15 @@
+!include versions.yaml
+!include site97.yaml
+---
+geos: "3.14.1"
+sqlite3:
+  version: "3.51.0"
+  release: "3510000"
+  year: "2025"
+sqlite3_module_rel: "1"
+proj: "9.7.1"
+proj_buildtype: "cmake"
+proj_module_rel: "1"
+gdal: "3.12.1"
+gdal_module_rel: "1"
+gdal_buildtype: "cmake"
