@@ -29,6 +29,8 @@
   # actual build depending on source version
   buildtype: "{{versions.gdal_buildtype}}"
 
+  addfile:
+    - filter-requires-{{name}}.sh
   build:
     configure: !ifeq "{{buildtype}},cmake,{{configure_cmake}},{{configure_autotools}}"
     configure_args:
@@ -44,6 +46,7 @@
     - "{{compiler}}_{{compiler_version}}"
     - proj_{{versions.proj}}_{{compiler}}_{{compiler_version}}
     - sqlite3_{{versions.sqlite3.version}}_{{compiler}}_{{compiler_version}}
+  rpmFilters: *filterRequires
 
 ####
 # NOTE: as of 3.6.2 gdal is using cmake for building from source
