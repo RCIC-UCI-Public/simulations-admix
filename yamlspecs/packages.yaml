@@ -1,4 +1,5 @@
 site: !include site.yaml
+enablerepo: !OScmp ">=, 10, epel,"
 system:
   - flex
   - bison
