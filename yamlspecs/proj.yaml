@@ -10,6 +10,9 @@
   baserpm: "{{name}}_{{version}}_{{compiler}}_{{compiler_version}}"
   vendor_source: https://github.com/OSGeo/PROJ/archive/{{version}}.{{extension}}
   src_dir: "{{package}}-{{version}}"
+  confpatch: "{{name}}-{{version}}-configure.patch"
+  addfile:
+    - "{{confpatch}}"
   description: |
     PROJ is a generic coordinate transformation software. It transforms
     coordinates from one coordinate reference system (CRS) to another. This includes
@@ -17,11 +20,13 @@
     See https://proj.org
 
   # for autotools build
-  configure_autotools: ./autogen.sh; ./configure --prefix={{root}}
+  autoupdate: !OScmp ">=, 10, autoupdate;,"
+  patchconfig: !OScmp ">=, 10, patch < ../{{confpatch}};, "
+  configure_autotools: "{{autoupdate}} ./autogen.sh; {{patchconfig}} ./configure --prefix={{root}}"
   pkgmake_autotools: make -j 8
   makeinstall_autotools: make prefix=$(ROOT){{root}} install
   # for cmake build
-  configure_cmake: sed -i "s/PROJ_DATA_PATH}/CMAKE_INSTALL_DATADIR}\/proj/" data/CMakeLists.txt; mkdir builddir; cd builddir; cmake -DCMAKE_INSTALL_PREFIX={{root}} -DCMAKE_BUILD_TYPE=Release ..
+  configure_cmake: sed -i -e "s%PROJ_DATA_PATH}%CMAKE_INSTALL_DATADIR}/proj%" data/CMakeLists.txt; mkdir builddir; cd builddir; cmake -DCMAKE_INSTALL_PREFIX={{root}} -DCMAKE_BUILD_TYPE=Release ..
   pkgmake_cmake: cd builddir; make -j 8
   makeinstall_cmake: cd builddir; cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
   # actual build depending on source version

@@ -1,0 +1,36 @@
+*** configure	Fri Jun  5 11:16:34 2026
+--- ../configure.OK	Fri Jun  5 11:11:57 2026
+***************
+*** 4850,4856 ****
+  do
+    IFS=$as_save_IFS
+    case $as_dir in #(((
+!     ''
+   as_dir=./ ;;
+      */) ;;
+      *) as_dir=$as_dir/ ;;
+--- 4850,4856 ----
+  do
+    IFS=$as_save_IFS
+    case $as_dir in #(((
+!      '')
+   as_dir=./ ;;
+      */) ;;
+      *) as_dir=$as_dir/ ;;
+***************
+*** 5749,5755 ****
+    am__fastdepCC_FALSE=
+  fi
+  
+! )
+  
+  
+  
+--- 5749,5755 ----
+    am__fastdepCC_FALSE=
+  fi
+  
+! #)
+  
+  
+  
