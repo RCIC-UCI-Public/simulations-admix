@@ -8,6 +8,7 @@
   compiler_version: "{{versions.compiler.version}}"
   baserpm: "{{name}}_{{version}}_{{compiler}}_{{compiler_version}}"
   vendor_source: https://github.com/OSGeo/gdal/archive/v{{version}}.{{extension}}
+  preconfig_patch: "{{name}}-{{version}}-preconfigure.patch"
   description: |
     GDAL - Geospatial Data Abstraction Library. It is a translator library for raster and
     vector geospatial data formats that is released under an X/MIT style Open Source License by
@@ -19,6 +20,8 @@
   # for autotools build
   # For OS < 10, use autogen.sh to rebuild ./configure, otherwise use autoupdate to rebuild ./configure
   autogen: !OScmp "<, 10, ./autogen.sh, autoupdate" 
+  os10: !OScmp ">=, 10 , True, False"
+  preconfigure_10:  (cd gdal; patch < ../../{{preconfig_patch}}; ./autogen.sh)
   configure_autotools: cd gdal; {{autogen}}; unset CPPFLAGS; export CXXFLAGS=-fpermissive; ./configure --with-proj=$$PROJ_HOME --with-geos=yes --prefix={{root}}
   pkgmake_autotools: unset MAKEFLAGS; unset CPPFLAGS; make -j 8
   makeinstall_autotools: cd gdal; make prefix=$(ROOT){{root}} install
@@ -33,7 +36,10 @@
 
   addfile:
     - filter-requires-{{name}}.sh
+    - "{{preconfig_patch}}"
+
   build:
+    preconfigure: !eval "'preconfigure_10' if '{{version}}' == '3.4.1' and {{os10}} else ''" 
     configure: !ifeq "{{buildtype}},cmake,{{configure_cmake}},{{configure_autotools}}"
     configure_args:
     modules:

@@ -25,8 +25,14 @@
   configure_autotools: "{{autoupdate}} ./autogen.sh; {{patchconfig}} ./configure --prefix={{root}}"
   pkgmake_autotools: make -j 8
   makeinstall_autotools: make prefix=$(ROOT){{root}} install
+
   # for cmake build
-  configure_cmake: sed -i -e "s%PROJ_DATA_PATH}%CMAKE_INSTALL_DATADIR}/proj%" data/CMakeLists.txt; mkdir builddir; cd builddir; cmake -DCMAKE_INSTALL_PREFIX={{root}} -DCMAKE_BUILD_TYPE=Release ..
+  cmake_opts: -DCMAKE_INSTALL_PREFIX={{root}} -DCMAKE_BUILD_TYPE=Release
+  cmake_opts_tiff: -DTIFF_INCLUDE_DIR="$$libtiff__PREFIX/include" -DTIFF_LIBRARY="$$libtiff__PREFIX/lib/libtiff.so"
+  os10: !OScmp ">=, 10, True, False"
+  cmake_opts_10: !eval "'{{cmake_opts_tiff}}' if '{{version}}' == '9.0.0' and {{os10}} else ''"
+
+  configure_cmake: sed -i -e "s@PROJ_DATA_PATH}@CMAKE_INSTALL_DATADIR}/proj@" data/CMakeLists.txt; mkdir builddir; cd builddir; cmake {{cmake_opts_10}} {{cmake_opts}} ..
   pkgmake_cmake: cd builddir; make -j 8
   makeinstall_cmake: cd builddir; cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
   # actual build depending on source version
@@ -40,6 +46,7 @@
     modules:
       - "{{build.base_modules}}"
       - cmake/{{versions.cmake}}
+      - !OScmp ">=, 10, libtiff/{{versions.libtiff}}, "
     pkgmake: !ifeq "{{buildtype}},cmake,{{pkgmake_cmake}},{{pkgmake_autotools}}"
   install:
     makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"

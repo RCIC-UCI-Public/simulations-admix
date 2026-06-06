@@ -19,3 +19,4 @@ netcdf: "4.7.0"
 compiler:
   name: gcc
   version: "8.4.0"
+libtiff: "4.4.0"

@@ -1,0 +1,22 @@
+*** ../configure.ac	Fri Jun  5 18:05:57 2026
+--- configure.ac	Fri Jun  5 18:06:45 2026
+***************
+*** 215,224 ****
+  
+  dnl Checks for programs.
+  
+! dnl AC_PROG_CC_C99 is deprecated since autoconf 2.70
+! m4_if(m4_version_compare(m4_defn([AC_AUTOCONF_VERSION]), [2.70]),
+!      [-1], [AC_PROG_CC_C99], [AC_PROG_CC])
+! 
+  AC_PROG_CXX
+  LT_INIT([win32-dll])
+  
+--- 215,221 ----
+  
+  dnl Checks for programs.
+  
+! AC_PROG_CC
+  AC_PROG_CXX
+  LT_INIT([win32-dll])
+  
