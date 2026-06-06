@@ -16,6 +16,7 @@ system:
   - boost-devel
   - tcl-devel
   - !eval "'sqlite-devel' if {{site.os_release}} >= 8 else ''"
+  - libtiff-devel 
 bootstrap:
 build:
 manifest:
