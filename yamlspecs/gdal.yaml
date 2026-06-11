@@ -27,7 +27,10 @@
   makeinstall_autotools: cd gdal; make prefix=$(ROOT){{root}} install
 
   # for cmake build
-  configure_cmake: mkdir builddir; cd builddir; cmake -DCMAKE_INSTALL_PREFIX={{root}} ..
+  gdal_use_custom_tiff: "{{versions.gdal_use_custom_tiff}}"
+  cmake_opts: -DCMAKE_INSTALL_PREFIX={{root}}
+  cmake_opts_10: !eval "'{{cmake_opts_tiff}}' if {{gdal_use_custom_tiff}}  and {{os10}} else ''"
+  configure_cmake: mkdir builddir; cd builddir; cmake {{cmake_opts_10}} {{cmake_opts}} ..
   pkgmake_cmake: cd builddir; make -j 8
   makeinstall_cmake: cd builddir; cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
 
@@ -39,7 +42,7 @@
     - "{{preconfig_patch}}"
 
   build:
-    preconfigure: !eval "'preconfigure_10' if '{{version}}' == '3.4.1' and {{os10}} else ''" 
+    preconfigure: !eval "'preconfigure_10' if '{{version}}' == '3.4.1' and {{os10}} else 'echo no preconfigure'" 
     configure: !ifeq "{{buildtype}},cmake,{{configure_cmake}},{{configure_autotools}}"
     configure_args:
     modules:
@@ -47,6 +50,8 @@
       - proj/{{versions.proj}}/{{compiler}}.{{compiler_version}}
       - sqlite3/{{versions.sqlite3.version}}/{{compiler}}.{{compiler_version}}
       - geos/{{versions.geos}}/{{compiler}}.{{compiler_version}}
+      - cmake/3.20.5
+      - !eval "'libtiff/{{versions.libtiff}}' if {{gdal_use_custom_tiff}}  and {{os10}} else ''"
     pkgmake: !ifeq "{{buildtype}},cmake,{{pkgmake_cmake}},{{pkgmake_autotools}}"
   install:
     makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"

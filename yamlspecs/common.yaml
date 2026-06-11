@@ -5,6 +5,11 @@
   versions: !include versions.yaml
   compiler: "{{versions.compiler.name}}"
   compiler_version: "{{versions.compiler.version}}"
+  os10: !OScmp ">=, 10, True, False"
+
+  # Some versions of proj/gdal need this identical CMAKE options list. 
+  cmake_opts_tiff: -DTIFF_INCLUDE_DIR="$$libtiff__PREFIX/include" -DTIFF_LIBRARY="$$libtiff__PREFIX/lib/libtiff.so"
+
   build:
     modules:
       - "{{compiler}}/{{compiler_version}}"

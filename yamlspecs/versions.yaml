@@ -5,6 +5,11 @@ opensees: "3.3.0"
 proj: "6.3.2"
 proj_buildtype: "autotools"
 proj_module_rel: "2"
+  
+## On Rocky 10, some versions of Proj/gdal need a custom version of tiff
+proj_use_custom_tiff: False
+gdal_use_custom_tiff: False
+
 gdal: "3.1.0"
 gdal_module_rel: "2"
 gdal_buildtype: "autotools"

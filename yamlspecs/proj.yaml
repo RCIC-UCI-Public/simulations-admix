@@ -27,10 +27,9 @@
   makeinstall_autotools: make prefix=$(ROOT){{root}} install
 
   # for cmake build
+  proj_use_custom_tiff: "{{versions.proj_use_custom_tiff}}"
   cmake_opts: -DCMAKE_INSTALL_PREFIX={{root}} -DCMAKE_BUILD_TYPE=Release
-  cmake_opts_tiff: -DTIFF_INCLUDE_DIR="$$libtiff__PREFIX/include" -DTIFF_LIBRARY="$$libtiff__PREFIX/lib/libtiff.so"
-  os10: !OScmp ">=, 10, True, False"
-  cmake_opts_10: !eval "'{{cmake_opts_tiff}}' if '{{version}}' == '9.0.0' and {{os10}} else ''"
+  cmake_opts_10: !eval "'{{cmake_opts_tiff}}' if {{proj_use_custom_tiff}}  and {{os10}} else ''"
 
   configure_cmake: sed -i -e "s@PROJ_DATA_PATH}@CMAKE_INSTALL_DATADIR}/proj@" data/CMakeLists.txt; mkdir builddir; cd builddir; cmake {{cmake_opts_10}} {{cmake_opts}} ..
   pkgmake_cmake: cd builddir; make -j 8
@@ -46,8 +45,10 @@
     modules:
       - "{{build.base_modules}}"
       - cmake/{{versions.cmake}}
-      - !OScmp ">=, 10, libtiff/{{versions.libtiff}}, "
+      - !eval "'libtiff/{{versions.libtiff}}' if {{proj_use_custom_tiff}} and {{os10}} else ''"
+
     pkgmake: !ifeq "{{buildtype}},cmake,{{pkgmake_cmake}},{{pkgmake_autotools}}"
+
   install:
     makeinstall: !ifeq "{{buildtype}},cmake,{{makeinstall_cmake}},{{makeinstall_autotools}}"
   requires:

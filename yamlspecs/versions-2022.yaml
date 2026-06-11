@@ -4,6 +4,7 @@
 proj: "9.0.0"
 proj_buildtype: "cmake"
 proj_module_rel: "2"
+proj_use_custom_tiff: True 
 gdal: "3.4.1"
 gdal_module_rel: "2"
 geos: "3.10.2"
