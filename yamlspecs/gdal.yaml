@@ -42,7 +42,7 @@
     - "{{preconfig_patch}}"
 
   build:
-    preconfigure: !eval "'preconfigure_10' if '{{version}}' == '3.4.1' and {{os10}} else 'echo no preconfigure'" 
+    preconfigure: !eval "'{{preconfigure_10}}' if '{{version}}' == '3.4.1' and {{os10}} else 'echo no preconfigure'" 
     configure: !ifeq "{{buildtype}},cmake,{{configure_cmake}},{{configure_autotools}}"
     configure_args:
     modules:
