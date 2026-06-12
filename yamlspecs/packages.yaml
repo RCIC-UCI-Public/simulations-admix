@@ -1,5 +1,4 @@
-site: !include site.yaml
-enablerepo: !OScmp ">=, 10, epel,"
+---
 system:
   - flex
   - bison
@@ -7,22 +6,26 @@ system:
   - libX11-devel
   - libXt-devel
   - mesa-libGL-devel
+  - boost-devel
+  - tcl-devel
+  - sqlite-devel
+  - libtiff-devel
+  - !OScmp ">=,10,{{qt5_10}},{{qt5}}"
+qt5_10:
+  - qt6-qt5compat
+  - qt6-qt5compat-devel
+qt5:
   - qt5-qtbase-devel
   - qt5-qtx11extras-devel
   - qt5-qttools-devel
   - qt5-qtxmlpatterns-devel
   - qt5-qtsvg-devel
   - qt5-qtbase-gui
-  - boost-devel
-  - tcl-devel
-  - !eval "'sqlite-devel' if {{site.os_release}} >= 8 else ''"
-  - libtiff-devel 
 bootstrap:
 build:
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"
-
 sets:
   - base
   - "2022"
