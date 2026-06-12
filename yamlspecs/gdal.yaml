@@ -27,9 +27,10 @@
   makeinstall_autotools: cd gdal; make prefix=$(ROOT){{root}} install
 
   # for cmake build
+  opts10: -DCMAKE_CXX_FLAGS=-fpermissive
   gdal_use_custom_tiff: "{{versions.gdal_use_custom_tiff}}"
   cmake_opts: -DCMAKE_INSTALL_PREFIX={{root}}
-  cmake_opts_10: !eval "'{{cmake_opts_tiff}}' if {{gdal_use_custom_tiff}}  and {{os10}} else ''"
+  cmake_opts_10: !eval "'{{cmake_opts_tiff}} {{opts10}}' if {{gdal_use_custom_tiff}}  and {{os10}} else ''"
   configure_cmake: mkdir builddir; cd builddir; cmake {{cmake_opts_10}} {{cmake_opts}} ..
   pkgmake_cmake: cd builddir; make -j 8
   makeinstall_cmake: cd builddir; cmake -DCMAKE_INSTALL_PREFIX=$(ROOT){{root}} -P cmake_install.cmake
